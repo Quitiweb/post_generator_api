@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-rj10pz#$#scd=ykv&-dni@2q353xnu%ynmj=9zxscj5q9mr25u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "post.quitiweb.com",
+]
 
 
 # Application definition
