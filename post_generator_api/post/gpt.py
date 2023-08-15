@@ -64,17 +64,15 @@ def generate_title_gpt(category="ciencia", tokens=0):
 def generate_post_gpt(title, tokens):
     description = f"""
     Escribe un post lo más detallado posible, en formato HTML, renderizado para SEO con headers, sub-headers, negritas, cursivas, etc.
-    En formato HTML. En texto plano.
+    En formato HTML. En texto plano. Como mínimo, 5 párrafos con 5 títulos en <h2></h2> y varios subtítulos en <h3></h3>.
     Título: "{title}"
+    Plantilla: <html><head></head><body><h2><h3></h3><h3></h3></h2><h2></h2></body></html>
     """
-
-    # conversation = ""
 
     retries = 5
     print()
     print("Longitud actual: ", tokens)
     print()
-    # conversation += title + "\nPersona: "
 
     ntries = 0
     error = True
@@ -100,8 +98,6 @@ def generate_post_gpt(title, tokens):
     result = ""
     for option in response.choices:
         result += option.message.content
-
-    # conversation += result + "\nPersona: "
 
     tokens = response["usage"]["total_tokens"]
 
