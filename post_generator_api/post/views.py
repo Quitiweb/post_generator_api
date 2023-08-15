@@ -14,11 +14,14 @@ class PostGeneratorView(ModelViewSet):
 
     @action(methods=["get"], detail=False, url_path="generate", serializer_class=PostGeneratorSerializer)
     def generate(self, request, *args, **kwargs):
-        category = "inteligencia artificial"
-        title, tokens = generate_title_gpt(category, 0)
-        result, tokens = generate_post_gpt(title, tokens)
+        category = request.query_params.get("category")
+        if category:
+            title, tokens = generate_title_gpt(category, 0)
+            result, tokens = generate_post_gpt(title, tokens)
 
-        print("Total tokens used: {}".format(tokens))
-        print()
+            print("Total tokens used: {}".format(tokens))
+            print()
 
-        return Response({"title": title, "description": result}, status=status.HTTP_200_OK)
+            return Response({"title": title, "description": result}, status=status.HTTP_200_OK)
+
+        return Response({}, status=status.HTTP_400_BAD_REQUEST)
