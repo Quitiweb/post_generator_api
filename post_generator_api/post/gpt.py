@@ -19,6 +19,9 @@ def get_openai_models():
 def generate_title_gpt(category="ciencia", tokens=0):
     description = f"""
     Necesito un título, solo un título, relacionado con {category} para escribir un post en un blog.
+    Para el título, quiero un punto de vista científico y/o tecnológico.
+    Diferente a otros anteriores que haya podido pedirte.
+    Que atraiga a una gran mayoría de personas nada más leerlo.
     """
 
     retries = 5
