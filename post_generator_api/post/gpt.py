@@ -68,7 +68,12 @@ def generate_post_gpt(title, tokens):
     template = """
     <html>
     <head></head>
-    <body><h2><p></p><h3><p></p></h3><h3><p></p></h3></h2><h2><p></p></h2></body>
+    <body>
+    <h2>titulo1</h2><p>descripcion</p><h3>subtitulo1</h3><p>descripcion</p><h3>subtitulo2</h3><p>descripcion</p>
+    <h2>titulo2</h2><p>descripcion</p><h3>subtitulo1</h3><p>descripcion</p><h3>subtitulo2</h3><p>descripcion</p>
+    <h4>categoria1</h4><p>descripcion<a>enlace</a></p><h4>categoria2</h4>
+    <h2>conclusion</h2><p>texto</p>
+    </body>
     </html>
     """
 
