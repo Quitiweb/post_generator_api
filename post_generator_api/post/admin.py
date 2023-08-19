@@ -28,6 +28,7 @@ class TitleAdmin(admin.ModelAdmin):
             form = CreateTitlesForm(request.POST)
             if form.is_valid():
                 # Llamamos a ChatGPT?
+                category = form.cleaned_data["category"]
                 self.message_user(request, "Títulos generadas correctamente")
                 return redirect("..")
         form = CreateTitlesForm()

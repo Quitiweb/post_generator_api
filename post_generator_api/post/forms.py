@@ -8,5 +8,5 @@ class CreateTitlesForm(ModelForm):
 
     class Meta:
         model = Title
-        fields = ["name", "category", "used"]
+        fields = ["category", ]
         # widgets = {}

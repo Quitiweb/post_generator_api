@@ -22,6 +22,10 @@ class Title(models.Model):
     def __str__(self):
         return f"{self.__class__.__name__} - {self.pk}: {self.name}"
 
+    @staticmethod
+    def get_random_title_from_cat(category):
+        return Title.objects.filter(used=False, category__name=category).first()
+
     class Meta:
         verbose_name = "Title"
         verbose_name_plural = "Titles"
