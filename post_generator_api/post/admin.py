@@ -29,7 +29,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Title)
 class TitleAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "category", )
+    list_display = ("id", "name", "category", "used", )
     change_list_template = "title_admin.html"
 
     def get_urls(self):
