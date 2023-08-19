@@ -1,9 +1,26 @@
-from django.contrib import admin, messages
+from django.contrib import admin
 from django.shortcuts import redirect, render
 from django.urls import path
 
 from .forms import CreateTitlesForm
+from .gpt import generate_titles_gpt
 from .models import Post, Title, Category, Section
+
+
+def create_titles_from_gpt(category):
+    retries = 5
+    ntries = 0
+    text = ""
+    while (ntries < retries) and (len(text.split(";")) < 2):
+        ntries += 1
+        text, tokens = generate_titles_gpt(category)
+
+    for title in text.split(";"):
+        Title.objects.create(
+            name=title,
+            category=category,
+            used=False
+        )
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -27,10 +44,11 @@ class TitleAdmin(admin.ModelAdmin):
         if request.method == "POST":
             form = CreateTitlesForm(request.POST)
             if form.is_valid():
-                # Llamamos a ChatGPT?
                 category = form.cleaned_data["category"]
-                self.message_user(request, "Títulos generadas correctamente")
+                create_titles_from_gpt(category)
+                self.message_user(request, "Títulos generados correctamente")
                 return redirect("..")
+
         form = CreateTitlesForm()
         payload = {"form": form}
 

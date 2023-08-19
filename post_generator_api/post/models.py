@@ -24,7 +24,7 @@ class Title(models.Model):
 
     @staticmethod
     def get_random_title_from_cat(category):
-        return Title.objects.filter(used=False, category__name=category).first()
+        return Title.objects.filter(used=False, category__name__contains=category).first()
 
     class Meta:
         verbose_name = "Title"

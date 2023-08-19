@@ -19,7 +19,7 @@ class PostGeneratorView(ModelViewSet):
             tokens = 0
             title = Title.get_random_title_from_cat(category)
             if title:
-                result, tokens = generate_post_gpt(title.name, tokens)
+                result, tokens = generate_post_gpt(title, tokens)
                 print("Total tokens used: {}".format(tokens))
                 print()
 

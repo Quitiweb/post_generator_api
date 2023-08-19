@@ -16,15 +16,11 @@ Que atraiga a una gran mayoría de personas nada más leerlo.
 """
 gpt_multiple_titles = """
 Necesito 30 ideas de títulos relacionados con {} para escribir un blog.
-En texto plano, sin numeración ni puntuación, para poder copiar y pegar.
-Por favor, no los enumeres, solo escribe los títulos línea a línea,
-sin enumerar ni puntuar, por favor. NO MARQUES LAS LINEAS
+En texto plano, en formato CSV, separados por punto y coma.
+No los enumeres, solo escribe los títulos línea a línea y, al final de cada línea,
+punto y coma.
 """
 gpt_multiple_titles_non_related = """
-Necesito 30 ideas de títulos relacionados con {} para escribir un blog.
-En texto plano, sin numeración ni puntuación, para poder copiar y pegar.
-Por favor, no los enumeres, solo escribe los títulos línea a línea,
-sin enumerar ni puntuar, por favor. NO MARQUES LAS LINEAS.
 Importante que no tengan relación con los títulos siguientes: {} 
 """
 gpt_template = """
@@ -55,21 +51,23 @@ def get_openai_models():
         print(r.id)
 
 
-def generate_title_gpt(category="ciencia", tokens=0):
-    description = gpt_one_title.format(category)
+def generate_titles_gpt(category="ciencia", tokens=0):
+    description = gpt_multiple_titles.format(category)
     result, tokens = call_gpt(description, tokens)
 
     # Eliminar las dobles comillas y la barra inclinada al principio y al final
     cleaned_string = result.strip("\"")
 
     # Reemplazar las barras inclinadas restantes
-    cleaned_string = cleaned_string.replace("\\", "")
+    # cleaned_string = cleaned_string.replace("\\", "")
 
     return cleaned_string, tokens
 
 
 def generate_post_gpt(title, tokens):
-    description = gpt_post.format(gpt_template, title)
+    description = gpt_post.format(gpt_template, title.name)
+    title.used = True
+    title.save()
     return call_gpt(description, tokens)
 
 
