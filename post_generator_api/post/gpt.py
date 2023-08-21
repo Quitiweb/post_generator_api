@@ -15,7 +15,7 @@ Diferente a otros anteriores que haya podido pedirte.
 Que atraiga a una gran mayoría de personas nada más leerlo.
 """
 gpt_multiple_titles = """
-Necesito 30 ideas de títulos relacionados con {} para escribir un blog.
+Necesito {} ideas de títulos relacionados con {} para escribir un blog.
 En texto plano, en formato CSV, separados por punto y coma.
 No los enumeres, solo escribe los títulos línea a línea y, al final de cada línea,
 punto y coma.
@@ -51,8 +51,8 @@ def get_openai_models():
         print(r.id)
 
 
-def generate_titles_gpt(category="ciencia", tokens=0):
-    description = gpt_multiple_titles.format(category)
+def generate_titles_gpt(category, ntitles=30, tokens=0):
+    description = gpt_multiple_titles.format(ntitles, category.name)
     result, tokens = call_gpt(description, tokens)
 
     # Eliminar las dobles comillas y la barra inclinada al principio y al final

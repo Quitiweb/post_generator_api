@@ -7,20 +7,21 @@ from .gpt import generate_titles_gpt
 from .models import Post, Title, Category, Section
 
 
-def create_titles_from_gpt(category):
+def create_titles_from_gpt(category, ntitles=30):
     retries = 5
     ntries = 0
     text = ""
     while (ntries < retries) and (len(text.split(";")) < 2):
         ntries += 1
-        text, tokens = generate_titles_gpt(category)
+        text, tokens = generate_titles_gpt(ntitles=ntitles, category=category)
 
     for title in text.split(";"):
-        Title.objects.create(
-            name=title,
-            category=category,
-            used=False
-        )
+        if title != "":
+            Title.objects.create(
+                name=title,
+                category=category,
+                used=False
+            )
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -44,8 +45,12 @@ class TitleAdmin(admin.ModelAdmin):
         if request.method == "POST":
             form = CreateTitlesForm(request.POST)
             if form.is_valid():
-                category = form.cleaned_data["category"]
-                create_titles_from_gpt(category)
+                categories = form.cleaned_data["categories"]
+                ntitles = form.cleaned_data["number_of_titles"]
+                if ntitles is None:
+                    ntitles = 30
+                for category in categories:
+                    create_titles_from_gpt(category=category, ntitles=ntitles)
                 self.message_user(request, "Títulos generados correctamente")
                 return redirect("..")
 

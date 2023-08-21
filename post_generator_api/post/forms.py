@@ -1,12 +1,17 @@
-from django.forms import FileField, ModelForm, SelectDateWidget
+from django.forms import IntegerField, ModelForm, ModelMultipleChoiceField, TextInput
 
-from .models import Title
+from .models import Category, Title
 
 
 class CreateTitlesForm(ModelForm):
-    # csv_file = FileField()
+    categories = ModelMultipleChoiceField(queryset=Category.objects.all())
+    number_of_titles = IntegerField(
+        widget=TextInput(attrs={'placeholder': "default value set to 30"}),
+        required=False,
+    )
 
     class Meta:
         model = Title
-        fields = ["category", ]
+        exclude = {"category", "name", "used", }
+        # fields = ["categories", "number_of_titles"]
         # widgets = {}
