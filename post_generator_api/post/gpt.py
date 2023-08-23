@@ -117,7 +117,7 @@ def generate_post_gpt(title, tokens):
         if image_urls:
             fpost += url_block.format(image_urls.pop())
 
-    return result, tokens
+    return fpost, tokens
 
 
 def call_gpt(description, tokens):
