@@ -6,6 +6,8 @@ import openai
 from dotenv import load_dotenv
 from openai.error import RateLimitError
 
+from .models import Title
+
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 gpt_one_title = """
@@ -20,7 +22,7 @@ En texto plano, en formato CSV, separados por punto y coma.
 No los enumeres, solo escribe los títulos línea a línea y, al final de cada línea,
 punto y coma.
 """
-gpt_multiple_titles_non_related = """
+gpt_titles_non_related = """
 Importante que no tengan relación con los títulos siguientes: {} 
 """
 gpt_template = """
@@ -53,6 +55,10 @@ def get_openai_models():
 
 def generate_titles_gpt(category, ntitles=30, tokens=0):
     description = gpt_multiple_titles.format(ntitles, category.name)
+    titles = Title.objects.filter(category=category)
+    if titles:
+        description += gpt_titles_non_related.format([t.name + ", " for t in titles])
+
     result, tokens = call_gpt(description, tokens)
 
     # Eliminar las dobles comillas y la barra inclinada al principio y al final

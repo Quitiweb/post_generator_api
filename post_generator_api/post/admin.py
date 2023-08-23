@@ -11,9 +11,12 @@ def create_titles_from_gpt(category, ntitles=30):
     retries = 5
     ntries = 0
     text = ""
-    while (ntries < retries) and (len(text.split(";")) < 2):
+    while (ntries < retries) and (len(text.split(";")) < ntitles):
         ntries += 1
         text, tokens = generate_titles_gpt(ntitles=ntitles, category=category)
+
+    if ntries == 5:
+        return False
 
     for title in text.split(";"):
         if title != "":
@@ -22,6 +25,7 @@ def create_titles_from_gpt(category, ntitles=30):
                 category=category,
                 used=False
             )
+    return True
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -49,9 +53,26 @@ class TitleAdmin(admin.ModelAdmin):
                 ntitles = form.cleaned_data["number_of_titles"]
                 if ntitles is None:
                     ntitles = 30
+
+                cat_failed = []
                 for category in categories:
-                    create_titles_from_gpt(category=category, ntitles=ntitles)
-                self.message_user(request, "Títulos generados correctamente")
+                    created = create_titles_from_gpt(category=category, ntitles=ntitles)
+                    if not created:
+                        cat_failed.append(category.name)
+
+                self.message_user(
+                    request,
+                    "Títulos generados correctamente",
+                )
+                if cat_failed:
+                    self.message_user(
+                        request,
+                        "Títulos no generados: {}".format(
+                            [c for c in cat_failed]
+                        ),
+                        level="WARNING",
+                    )
+
                 return redirect("..")
 
         form = CreateTitlesForm()
