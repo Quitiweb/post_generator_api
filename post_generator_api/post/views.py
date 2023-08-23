@@ -26,6 +26,6 @@ class PostGeneratorView(ModelViewSet):
                 return Response({"title": title.name, "description": result}, status=status.HTTP_200_OK)
             else:
                 return Response(
-                    {"error": "there is not a title for that category."}, status=status.HTTP_303_SEE_OTHER)
+                    {"error": "there is not title for that category."}, status=status.HTTP_303_SEE_OTHER)
 
         return Response({}, status=status.HTTP_400_BAD_REQUEST)

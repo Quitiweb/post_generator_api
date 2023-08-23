@@ -11,6 +11,7 @@ def create_titles_from_gpt(category, ntitles=30):
     retries = 5
     ntries = 0
     text = ""
+    # TODO: revisar ese while X < ntitles
     while (ntries < retries) and (len(text.split(";")) < ntitles):
         ntries += 1
         text, tokens = generate_titles_gpt(ntitles=ntitles, category=category)

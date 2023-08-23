@@ -42,6 +42,26 @@ En formato HTML. En texto plano. Como mínimo, 5 párrafos con 5 títulos en <h2
 Título: {}
 Plantilla: {}
 """
+gpt_image_v1 = """
+{}, low poly, isometric art, 3d art, high detail, artstation, concept art,
+behance, ray tracing, smooth, sharp focus, ethereal lighting
+"""
+gpt_image_v2 = """
+{}, The Future of Comfort: How Home Automation is Revolutionizing Our Lives, ultra hd,
+realistic, vivid colors, highly detailed, UHD drawing, pen and ink, perfect composition,
+beautiful detailed intricate insanely detailed octane render trending on artstation,
+8k artistic photography, photorealistic concept art,
+soft natural volumetric cinematic perfect light
+"""
+url_block = """
+<!-- wp:image {"id":0,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="{}" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+"""
 
 
 def get_openai_models():
@@ -51,6 +71,19 @@ def get_openai_models():
     res = openai.Model.list()
     for r in res.data:
         print(r.id)
+
+
+def generate_image(title):
+    response = openai.Image.create(
+        prompt=gpt_image_v2.format(title),
+        n=3,
+        size="1024x1024"
+    )
+    image_urls = []
+    for data in response["data"]:
+        image_urls.append(data['url'])
+
+    return image_urls
 
 
 def generate_titles_gpt(category, ntitles=30, tokens=0):
@@ -74,7 +107,22 @@ def generate_post_gpt(title, tokens):
     description = gpt_post.format(gpt_template, title.name)
     title.used = True
     title.save()
-    return call_gpt(description, tokens)
+
+    result, tokens = call_gpt(description, tokens)
+
+    # Generar imagen del título por API e IA
+    image_urls = generate_image(title.name)
+
+    # Split del código por cabeceras
+    # Poner la URL en el código
+    fpost = ""
+    # TODO: Comprobar que el split por H2 devuelve más de X resultados
+    for stext in result.split("</h2>"):
+        fpost += stext
+        if image_urls:
+            fpost += url_block.format(image_urls.pop())
+
+    return result, tokens
 
 
 def call_gpt(description, tokens):
