@@ -54,13 +54,8 @@ beautiful detailed intricate insanely detailed octane render trending on artstat
 soft natural volumetric cinematic perfect light
 """
 url_block = """
-<!-- wp:image {"id":0,"sizeSlug":"full","linkDestination":"none"} -->
 <figure class="wp-block-image size-full"><img src="{}" alt=""/></figure>
-<!-- /wp:image -->
-
-<!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
-<!-- /wp:separator -->
 """
 
 
