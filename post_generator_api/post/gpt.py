@@ -3,10 +3,12 @@ import time
 from urllib.error import HTTPError
 
 import openai
+import requests
+from django.conf import settings
 from dotenv import load_dotenv
 from openai.error import RateLimitError
 
-from .models import Title
+from .models import Post, Title
 
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -71,7 +73,7 @@ def get_openai_models():
 def generate_image(title):
     response = openai.Image.create(
         prompt=gpt_image_v2.format(title),
-        n=3,
+        n=4,
         size="1024x1024"
     )
     image_urls = []
@@ -108,14 +110,37 @@ def generate_post_gpt(title, tokens):
     # Generar imagen del título por API e IA
     image_urls = generate_image(title.name)
 
-    # Split del código por cabeceras
-    # Poner la URL en el código
+    post = Post.objects.create(
+        title=title,
+        category=title.category,
+        description=result,
+        featured=requests.get(image_urls[0]).content,
+        img1=requests.get(image_urls[1]).content,
+        img2=requests.get(image_urls[2]).content,
+        img3=requests.get(image_urls[3]).content,
+    )
+
+    # TODO: Featured image
+    #   CODIGO AQUI
+    #
+
+    # Split del código por cabeceras e inserción de las imágenes
     fpost = ""
     # TODO: Comprobar que el split por H2 devuelve más de X resultados
+    select_img = 0
     for stext in result.split("</h2>"):
         fpost += stext
-        if image_urls:
-            fpost += url_block.format(image_urls.pop())
+        select_img += 1
+        if select_img >= 4:
+            continue
+        if select_img == 1:
+            img_url = os.path.join(settings.MEDIA_ROOT, post.img1.url)
+        if select_img == 2:
+            img_url = os.path.join(settings.MEDIA_ROOT, post.img2.url)
+        if select_img == 3:
+            img_url = os.path.join(settings.MEDIA_ROOT, post.img3.url)
+
+        fpost += url_block.format(img_url)
 
     return fpost, tokens
 
