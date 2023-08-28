@@ -1,14 +1,18 @@
 from django.db import models
 
 
+def upload_to_fotos(instance, filename):
+    return "img/%s" % instance.id + "/" + filename
+
+
 class Post(models.Model):
     title = models.ForeignKey(to="Title", on_delete=models.CASCADE, related_name="post_titles")
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="post_cats")
     description = models.TextField()
-    featured = models.FileField(null=True, blank=True)
-    img1 = models.FileField(null=True, blank=True)
-    img2 = models.FileField(null=True, blank=True)
-    img3 = models.FileField(null=True, blank=True)
+    featured = models.ImageField(upload_to=upload_to_fotos, null=True, blank=True)
+    img1 = models.ImageField(upload_to=upload_to_fotos, null=True, blank=True)
+    img2 = models.ImageField(upload_to=upload_to_fotos, null=True, blank=True)
+    img3 = models.ImageField(upload_to=upload_to_fotos, null=True, blank=True)
 
     def __str__(self):
         return f"{self.__class__.__name__} - {self.pk}: {self.title.name}"
