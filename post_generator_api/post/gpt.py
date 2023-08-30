@@ -98,6 +98,9 @@ def generate_post_gpt(title, tokens):
 
         fpost += url_block.format(img_url)
 
+    post.description = fpost
+    post.save()
+
     return fpost, tokens
 
 

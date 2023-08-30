@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 HOST_ROOT = BASE_DIR.parent.parent
-PUBLIC_ROOT = os.path.abspath(os.path.join(HOST_ROOT, 'public'))
+PUBLIC_ROOT = os.path.abspath(os.path.join(HOST_ROOT, "public"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -117,6 +117,11 @@ STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
 
 # Media Files
 MEDIA_URL = "/media/"
+
+# Dev
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Prod
 MEDIA_ROOT = os.path.join(PUBLIC_ROOT, "media")
 
 # Default primary key field type
