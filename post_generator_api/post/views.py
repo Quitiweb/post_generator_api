@@ -19,7 +19,9 @@ class PostGeneratorView(ModelViewSet):
             tokens = 0
             title = Title.get_random_title_from_cat(category)
             if title:
-                result, tokens = generate_post_gpt(title, tokens)
+                prefix = r"https://" if request.is_secure() else r"http://"
+                domain = prefix + request.get_host()
+                result, tokens = generate_post_gpt(title, tokens, domain)
                 print("Total tokens used: {}".format(tokens))
                 print()
 

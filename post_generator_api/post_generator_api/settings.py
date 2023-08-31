@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -118,11 +119,10 @@ STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
 # Media Files
 MEDIA_URL = "/media/"
 
-# Dev
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-# Prod
-MEDIA_ROOT = os.path.join(PUBLIC_ROOT, "media")
+if config("PROD", default=True):
+    MEDIA_ROOT = os.path.join(PUBLIC_ROOT, "media")  # Prod
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # Dev
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

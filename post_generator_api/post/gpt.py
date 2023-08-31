@@ -57,7 +57,7 @@ def generate_titles_gpt(category, ntitles=30, tokens=0):
     return cleaned_string, tokens
 
 
-def generate_post_gpt(title, tokens):
+def generate_post_gpt(title, tokens, domain):
     description = gpt_post.format(gpt_template, title.name)
     title.used = True
     title.save()
@@ -83,18 +83,18 @@ def generate_post_gpt(title, tokens):
     # TODO: Comprobar que el split por H2 devuelve más de X resultados
     select_img = 0
     for stext in result.split("</h2>"):
-        fpost += stext
+        fpost += stext + "</h2>"
         select_img += 1
-        img_url = ""
+        img_url = domain
 
         if select_img >= 4:
             continue
         if select_img == 1:
-            img_url = os.path.join(settings.MEDIA_ROOT, post.img1.url)
+            img_url += os.path.join(settings.MEDIA_ROOT, post.img1.url)
         if select_img == 2:
-            img_url = os.path.join(settings.MEDIA_ROOT, post.img2.url)
+            img_url += os.path.join(settings.MEDIA_ROOT, post.img2.url)
         if select_img == 3:
-            img_url = os.path.join(settings.MEDIA_ROOT, post.img3.url)
+            img_url += os.path.join(settings.MEDIA_ROOT, post.img3.url)
 
         fpost += url_block.format(img_url)
 
