@@ -104,7 +104,7 @@ def generate_post_gpt(title, tokens, domain):
     return fpost, tokens
 
 
-def call_gpt(description, tokens):
+def call_gpt(description, tokens, model="gpt-3.5-turbo"):
     result = ""
     retries = 5
     ntries = 0
@@ -114,7 +114,7 @@ def call_gpt(description, tokens):
     while (ntries < retries) and error:
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+                model=model,
                 messages=[
                     {"role": "system", "content": description},
                     # {"role": "user", "content": conversation},
