@@ -29,8 +29,9 @@ gpt_template = """
 </html>
 """
 gpt_post = """
-Escribe un post lo más detallado posible, en formato HTML, renderizado para SEO con headers, sub-headers, negritas, cursivas, etc.
-En formato HTML. En texto plano. Como mínimo, 5 párrafos con 5 títulos en <h2></h2> y varios subtítulos en <h3></h3>.
+Escribe un post lo más detallado posible, renderizado para SEO con headers, sub-headers, negritas, cursivas, etc.
+En formato HTML. En texto plano. Como mínimo, 5 títulos en <h2></h2> y varios subtítulos en <h3></h3>.
+Las descripciones que sean de, al menos, dos párrafos.
 Título: {}
 Plantilla: {}
 """
