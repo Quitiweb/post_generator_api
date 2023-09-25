@@ -3,16 +3,14 @@ import time
 from urllib.error import HTTPError
 
 import openai
-from django.conf import settings
 from dotenv import load_dotenv
 from openai.error import RateLimitError
 
 from .models import Post, Title
 from .tools.prompts import (
     gpt_image_v2, gpt_multiple_titles, gpt_titles_non_related, gpt_post, gpt_template,
-    url_block,
 )
-from .tools.utils import save_images_from_url
+from .tools.utils import save_images_from_url, insert_images_into_text
 
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -28,6 +26,12 @@ def get_openai_models():
 
 
 def generate_image(title):
+    """
+    Esta funcionalidad actualmente tiene coste y no es una "maravilla" precisamente.
+    La dejo por aquí, pero en principio no voy a utilizarla.
+    :param title: Título de la imagen para el prompt de text-to-image
+    :return: las urls de las imágenes
+    """
     response = openai.Image.create(
         prompt=gpt_image_v2.format(title),
         n=4,
@@ -65,43 +69,24 @@ def generate_post_gpt(title, tokens, domain):
     result, tokens = call_gpt(description, tokens)
 
     # Generar imagen del título por API e IA
-    image_urls = generate_image(title.name)
+    # image_urls = generate_image(title.name)
 
     post = Post.objects.create(
         title=title,
         category=title.category,
         description=result,
     )
-    save_images_from_url(post, image_urls)
+    # save_images_from_url(post, image_urls)
 
     # TODO: Featured image
     #   CODIGO AQUI
     #
 
-    # Split del código por cabeceras e inserción de las imágenes
-    fpost = ""
-    # TODO: Comprobar que el split por H2 devuelve más de X resultados
-    select_img = 0
-    for stext in result.split("</h2>"):
-        fpost += stext + "</h2>"
-        select_img += 1
-        img_url = domain
-
-        if select_img >= 4:
-            continue
-        if select_img == 1:
-            img_url += os.path.join(settings.MEDIA_ROOT, post.img1.url)
-        if select_img == 2:
-            img_url += os.path.join(settings.MEDIA_ROOT, post.img2.url)
-        if select_img == 3:
-            img_url += os.path.join(settings.MEDIA_ROOT, post.img3.url)
-
-        fpost += url_block.format(img_url)
-
-    post.description = fpost
+    # post.description = insert_images_into_text(post, result, domain)
+    post.description = result
     post.save()
 
-    return fpost, tokens
+    return post.description, tokens
 
 
 def call_gpt(description, tokens, model="gpt-3.5-turbo"):
