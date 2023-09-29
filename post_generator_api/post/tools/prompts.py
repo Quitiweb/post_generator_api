@@ -32,8 +32,16 @@ gpt_post = """
 Escribe un post lo más detallado posible, renderizado para SEO con headers, sub-headers, negritas, cursivas, etc.
 En formato HTML. En texto plano. Como mínimo, 5 títulos en <h2></h2> y varios subtítulos en <h3></h3>.
 Las descripciones que sean de, al menos, dos párrafos.
-Título: {}
-Plantilla: {}
+Plantilla:
+<html>
+<head></head>
+<body>
+<h2>titulo1</h2><p>descripcion</p><h3>subtitulo1</h3><p>descripcion</p><h3>subtitulo2</h3><p>descripcion</p>
+<h2>titulo2</h2><p>descripcion</p><h3>subtitulo1</h3><p>descripcion</p><h3>subtitulo2</h3><p>descripcion</p>
+<h4>categoria1</h4><p>descripcion<a>enlace</a></p><h4>categoria2</h4>
+<h2>conclusion</h2><p>texto</p>
+</body>
+</html> 
 """
 gpt_image_v1 = """
 {}, low poly, isometric art, 3d art, high detail, artstation, concept art,

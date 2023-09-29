@@ -4,7 +4,7 @@ from django.urls import path
 
 from .forms import CreateTitlesForm
 from .gpt import generate_titles_gpt
-from .models import Post, Title, Category, Section
+from .models import Post, Title, Category, Section, GptPrompt
 
 
 def create_titles_from_gpt(category, ntitles=30):
@@ -87,6 +87,11 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "section", )
 
 
+class SectionAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", )
+
+
+@admin.register(GptPrompt)
 class SectionAdmin(admin.ModelAdmin):
     list_display = ("id", "name", )
 

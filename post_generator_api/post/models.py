@@ -23,8 +23,14 @@ class Post(models.Model):
 
 
 class Title(models.Model):
-    name = models.CharField(max_length=150)
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="title_cats")
+    gpt_prompt = models.ForeignKey(
+        "GptPrompt", on_delete=models.CASCADE, related_name="title_prompts",
+        null=True, blank=True
+    )
+
+    name = models.CharField(max_length=500)
+    description = models.TextField(null=True, blank=True)
     used = models.BooleanField(default=False)
 
     def __str__(self):
@@ -60,3 +66,15 @@ class Section(models.Model):
     class Meta:
         verbose_name = "Section"
         verbose_name_plural = "Sections"
+
+
+class GptPrompt(models.Model):
+    name = models.CharField(max_length=250)
+    prompt = models.TextField()
+
+    def __str__(self):
+        return f"{self.__class__.__name__} - {self.pk}: {self.name}"
+
+    class Meta:
+        verbose_name = "GPT Prompt"
+        verbose_name_plural = "GPT Prompts"

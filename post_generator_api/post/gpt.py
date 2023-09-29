@@ -62,7 +62,12 @@ def generate_titles_gpt(category, ntitles=30, tokens=0):
 
 
 def generate_post_gpt(title, tokens, domain):
-    description = gpt_post.format(gpt_template, title.name)
+    description = f"Título: {title.name}. "
+    description += title.gpt_prompt.prompt if title.gpt_prompt else gpt_post
+
+    if title.description:
+        description += ". Básate en esta información: " + title.description
+
     title.used = True
     title.save()
 
