@@ -41,7 +41,7 @@ Plantilla:
 <h4>categoria1</h4><p>descripcion<a>enlace</a></p><h4>categoria2</h4>
 <h2>conclusion</h2><p>texto</p>
 </body>
-</html> 
+</html>
 """
 gpt_image_v1 = """
 {}, low poly, isometric art, 3d art, high detail, artstation, concept art,

@@ -1,6 +1,6 @@
-import os
 import time
 from urllib.error import HTTPError
+from decouple import config
 
 import openai
 from dotenv import load_dotenv
@@ -13,7 +13,7 @@ from .tools.prompts import (
 from .tools.utils import save_images_from_url, insert_images_into_text
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = config("OPENAI_API_KEY")
 
 
 def get_openai_models():
