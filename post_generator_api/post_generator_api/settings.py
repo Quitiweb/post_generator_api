@@ -18,7 +18,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 HOST_ROOT = BASE_DIR.parent.parent
 PUBLIC_ROOT = os.path.abspath(os.path.join(HOST_ROOT, "public"))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -33,7 +32,6 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -42,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third_party_apps
+    "rest_framework",
+    "rest_framework.authtoken",
+    # my_apps
     'post',
     'aws',
 ]
@@ -79,7 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'post_generator_api.wsgi.application'
 
-
 # Database
 DATABASES = {
     'default': {
@@ -87,7 +88,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -105,13 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
@@ -127,3 +125,12 @@ else:
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "post.authentication.BearerAuthentication",
+    ],
+}
