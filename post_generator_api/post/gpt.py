@@ -1,19 +1,23 @@
 import time
 from urllib.error import HTTPError
-from decouple import config
 
 import openai
+from decouple import config
 from dotenv import load_dotenv
-from openai.error import RateLimitError
+from openai._exceptions import RateLimitError
 
 from .models import Post, Title
 from .tools.prompts import (
-    gpt_image_v2, gpt_multiple_titles, gpt_titles_non_related, gpt_post, gpt_template,
-)
-from .tools.utils import save_images_from_url, insert_images_into_text
+    gpt_image_v2, gpt_multiple_titles, gpt_titles_non_related, gpt_post, )
 
 load_dotenv()
 openai.api_key = config("OPENAI_API_KEY")
+# GPT_MODEL = "gpt-3.5-turbo"
+# GPT_MODEL = "gpt-4"
+# GPT_MODEL = "gpt-4-32k"
+GPT_MODEL = "gpt-4-1106-preview"
+
+client = openai.OpenAI()
 
 
 def get_openai_models():
@@ -94,7 +98,7 @@ def generate_post_gpt(title, tokens, domain):
     return post.description, tokens
 
 
-def call_gpt(description, tokens, model="gpt-3.5-turbo"):
+def call_gpt(description, tokens, model=GPT_MODEL):
     result = ""
     retries = 5
     ntries = 0
@@ -103,11 +107,10 @@ def call_gpt(description, tokens, model="gpt-3.5-turbo"):
 
     while (ntries < retries) and error:
         try:
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model=model,
                 messages=[
                     {"role": "system", "content": description},
-                    # {"role": "user", "content": conversation},
                 ]
             )
             error = False
@@ -124,6 +127,6 @@ def call_gpt(description, tokens, model="gpt-3.5-turbo"):
         for option in response.choices:
             result += option.message.content
 
-        tokens = response["usage"]["total_tokens"]
+        tokens = response.usage.total_tokens
 
     return result, tokens

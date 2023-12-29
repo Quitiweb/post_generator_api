@@ -12,6 +12,4 @@ class CreateTitlesForm(ModelForm):
 
     class Meta:
         model = Title
-        exclude = {"category", "name", "used", }
-        # fields = ["categories", "number_of_titles"]
-        # widgets = {}
+        fields = ["categories", "number_of_titles"]

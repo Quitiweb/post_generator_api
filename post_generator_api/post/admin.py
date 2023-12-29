@@ -30,12 +30,12 @@ def create_titles_from_gpt(category, ntitles=30):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", "category", )
+    list_display = ("id", "title", "category",)
 
 
 @admin.register(Title)
 class TitleAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "category", "used", )
+    list_display = ("id", "name", "category", "used",)
     change_list_template = "title_admin.html"
 
     def get_urls(self):
@@ -84,16 +84,16 @@ class TitleAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "section", )
+    list_display = ("id", "name", "section",)
 
 
 class SectionAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", )
+    list_display = ("id", "name",)
 
 
 @admin.register(GptPrompt)
 class SectionAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", )
+    list_display = ("id", "name",)
 
 
 admin.site.register(Post, PostAdmin)
