@@ -28,7 +28,7 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.offer_shipping_charge import OfferShippingCharge  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_shipping_charge import OfferShippingCharge  # noqa: F401,E501
 
 
 class OfferDeliveryInfo(object):

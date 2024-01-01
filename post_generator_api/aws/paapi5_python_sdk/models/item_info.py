@@ -1,44 +1,37 @@
-# coding: utf-8
-
 """
-  Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-  Licensed under the Apache License, Version 2.0 (the "License").
-  You may not use this file except in compliance with the License.
-  A copy of the License is located at
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License is located at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-  or in the "license" file accompanying this file. This file is distributed
-  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-  express or implied. See the License for the specific language governing
-  permissions and limitations under the License.
-"""
+or in the "license" file accompanying this file. This file is distributed
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+express or implied. See the License for the specific language governing
+permissions and limitations under the License.
 
-
-"""
-    ProductAdvertisingAPI
+ProductAdvertisingAPI
 
     https://webservices.amazon.com/paapi5/documentation/index.html  # noqa: E501
 """
-
 
 import pprint
 import re  # noqa: F401
 
 import six
-
-from paapi5_python_sdk.models.by_line_info import ByLineInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.classifications import Classifications  # noqa: F401,E501
-from paapi5_python_sdk.models.content_info import ContentInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.content_rating import ContentRating  # noqa: F401,E501
-from paapi5_python_sdk.models.external_ids import ExternalIds  # noqa: F401,E501
-from paapi5_python_sdk.models.manufacture_info import ManufactureInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.multi_valued_attribute import MultiValuedAttribute  # noqa: F401,E501
-from paapi5_python_sdk.models.product_info import ProductInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.single_string_valued_attribute import SingleStringValuedAttribute  # noqa: F401,E501
-from paapi5_python_sdk.models.technical_info import TechnicalInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.trade_in_info import TradeInInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.by_line_info import ByLineInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.classifications import Classifications  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.content_info import ContentInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.content_rating import ContentRating  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.external_ids import ExternalIds  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.manufacture_info import ManufactureInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.multi_valued_attribute import MultiValuedAttribute  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.product_info import ProductInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.single_string_valued_attribute import SingleStringValuedAttribute  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.technical_info import TechnicalInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.trade_in_info import TradeInInfo  # noqa: F401,E501
 
 
 class ItemInfo(object):
@@ -82,7 +75,9 @@ class ItemInfo(object):
         'trade_in_info': 'TradeInInfo'
     }
 
-    def __init__(self, by_line_info=None, classifications=None, content_info=None, content_rating=None, external_ids=None, features=None, manufacture_info=None, product_info=None, technical_info=None, title=None, trade_in_info=None):  # noqa: E501
+    def __init__(self, by_line_info=None, classifications=None, content_info=None, content_rating=None,
+                 external_ids=None, features=None, manufacture_info=None, product_info=None, technical_info=None,
+                 title=None, trade_in_info=None):  # noqa: E501
         """ItemInfo - a model defined in Swagger"""  # noqa: E501
 
         self._by_line_info = None
@@ -125,7 +120,6 @@ class ItemInfo(object):
     def by_line_info(self):
         """Gets the by_line_info of this ItemInfo.  # noqa: E501
 
-
         :return: The by_line_info of this ItemInfo.  # noqa: E501
         :rtype: ByLineInfo
         """
@@ -134,7 +128,6 @@ class ItemInfo(object):
     @by_line_info.setter
     def by_line_info(self, by_line_info):
         """Sets the by_line_info of this ItemInfo.
-
 
         :param by_line_info: The by_line_info of this ItemInfo.  # noqa: E501
         :type: ByLineInfo
@@ -146,7 +139,6 @@ class ItemInfo(object):
     def classifications(self):
         """Gets the classifications of this ItemInfo.  # noqa: E501
 
-
         :return: The classifications of this ItemInfo.  # noqa: E501
         :rtype: Classifications
         """
@@ -155,7 +147,6 @@ class ItemInfo(object):
     @classifications.setter
     def classifications(self, classifications):
         """Sets the classifications of this ItemInfo.
-
 
         :param classifications: The classifications of this ItemInfo.  # noqa: E501
         :type: Classifications
@@ -167,7 +158,6 @@ class ItemInfo(object):
     def content_info(self):
         """Gets the content_info of this ItemInfo.  # noqa: E501
 
-
         :return: The content_info of this ItemInfo.  # noqa: E501
         :rtype: ContentInfo
         """
@@ -176,7 +166,6 @@ class ItemInfo(object):
     @content_info.setter
     def content_info(self, content_info):
         """Sets the content_info of this ItemInfo.
-
 
         :param content_info: The content_info of this ItemInfo.  # noqa: E501
         :type: ContentInfo
@@ -188,7 +177,6 @@ class ItemInfo(object):
     def content_rating(self):
         """Gets the content_rating of this ItemInfo.  # noqa: E501
 
-
         :return: The content_rating of this ItemInfo.  # noqa: E501
         :rtype: ContentRating
         """
@@ -197,7 +185,6 @@ class ItemInfo(object):
     @content_rating.setter
     def content_rating(self, content_rating):
         """Sets the content_rating of this ItemInfo.
-
 
         :param content_rating: The content_rating of this ItemInfo.  # noqa: E501
         :type: ContentRating
@@ -209,7 +196,6 @@ class ItemInfo(object):
     def external_ids(self):
         """Gets the external_ids of this ItemInfo.  # noqa: E501
 
-
         :return: The external_ids of this ItemInfo.  # noqa: E501
         :rtype: ExternalIds
         """
@@ -218,7 +204,6 @@ class ItemInfo(object):
     @external_ids.setter
     def external_ids(self, external_ids):
         """Sets the external_ids of this ItemInfo.
-
 
         :param external_ids: The external_ids of this ItemInfo.  # noqa: E501
         :type: ExternalIds
@@ -230,7 +215,6 @@ class ItemInfo(object):
     def features(self):
         """Gets the features of this ItemInfo.  # noqa: E501
 
-
         :return: The features of this ItemInfo.  # noqa: E501
         :rtype: MultiValuedAttribute
         """
@@ -239,7 +223,6 @@ class ItemInfo(object):
     @features.setter
     def features(self, features):
         """Sets the features of this ItemInfo.
-
 
         :param features: The features of this ItemInfo.  # noqa: E501
         :type: MultiValuedAttribute
@@ -251,7 +234,6 @@ class ItemInfo(object):
     def manufacture_info(self):
         """Gets the manufacture_info of this ItemInfo.  # noqa: E501
 
-
         :return: The manufacture_info of this ItemInfo.  # noqa: E501
         :rtype: ManufactureInfo
         """
@@ -260,7 +242,6 @@ class ItemInfo(object):
     @manufacture_info.setter
     def manufacture_info(self, manufacture_info):
         """Sets the manufacture_info of this ItemInfo.
-
 
         :param manufacture_info: The manufacture_info of this ItemInfo.  # noqa: E501
         :type: ManufactureInfo
@@ -272,7 +253,6 @@ class ItemInfo(object):
     def product_info(self):
         """Gets the product_info of this ItemInfo.  # noqa: E501
 
-
         :return: The product_info of this ItemInfo.  # noqa: E501
         :rtype: ProductInfo
         """
@@ -281,7 +261,6 @@ class ItemInfo(object):
     @product_info.setter
     def product_info(self, product_info):
         """Sets the product_info of this ItemInfo.
-
 
         :param product_info: The product_info of this ItemInfo.  # noqa: E501
         :type: ProductInfo
@@ -293,7 +272,6 @@ class ItemInfo(object):
     def technical_info(self):
         """Gets the technical_info of this ItemInfo.  # noqa: E501
 
-
         :return: The technical_info of this ItemInfo.  # noqa: E501
         :rtype: TechnicalInfo
         """
@@ -302,7 +280,6 @@ class ItemInfo(object):
     @technical_info.setter
     def technical_info(self, technical_info):
         """Sets the technical_info of this ItemInfo.
-
 
         :param technical_info: The technical_info of this ItemInfo.  # noqa: E501
         :type: TechnicalInfo
@@ -314,7 +291,6 @@ class ItemInfo(object):
     def title(self):
         """Gets the title of this ItemInfo.  # noqa: E501
 
-
         :return: The title of this ItemInfo.  # noqa: E501
         :rtype: SingleStringValuedAttribute
         """
@@ -323,7 +299,6 @@ class ItemInfo(object):
     @title.setter
     def title(self, title):
         """Sets the title of this ItemInfo.
-
 
         :param title: The title of this ItemInfo.  # noqa: E501
         :type: SingleStringValuedAttribute
@@ -335,7 +310,6 @@ class ItemInfo(object):
     def trade_in_info(self):
         """Gets the trade_in_info of this ItemInfo.  # noqa: E501
 
-
         :return: The trade_in_info of this ItemInfo.  # noqa: E501
         :rtype: TradeInInfo
         """
@@ -344,7 +318,6 @@ class ItemInfo(object):
     @trade_in_info.setter
     def trade_in_info(self, trade_in_info):
         """Sets the trade_in_info of this ItemInfo.
-
 
         :param trade_in_info: The trade_in_info of this ItemInfo.  # noqa: E501
         :type: TradeInInfo

@@ -28,8 +28,8 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.browse_nodes_result import BrowseNodesResult  # noqa: F401,E501
-from paapi5_python_sdk.models.error_data import ErrorData  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.browse_nodes_result import BrowseNodesResult  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.error_data import ErrorData  # noqa: F401,E501
 
 
 class GetBrowseNodesResponse(object):

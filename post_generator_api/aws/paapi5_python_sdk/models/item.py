@@ -28,13 +28,13 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.browse_node_info import BrowseNodeInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.customer_reviews import CustomerReviews  # noqa: F401,E501
-from paapi5_python_sdk.models.images import Images  # noqa: F401,E501
-from paapi5_python_sdk.models.item_info import ItemInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.offers import Offers  # noqa: F401,E501
-from paapi5_python_sdk.models.rental_offers import RentalOffers  # noqa: F401,E501
-from paapi5_python_sdk.models.variation_attribute import VariationAttribute  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.browse_node_info import BrowseNodeInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.customer_reviews import CustomerReviews  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.images import Images  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.item_info import ItemInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offers import Offers  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.rental_offers import RentalOffers  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.variation_attribute import VariationAttribute  # noqa: F401,E501
 
 
 class Item(object):

@@ -28,8 +28,8 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.browse_node_ancestor import BrowseNodeAncestor  # noqa: F401,E501
-from paapi5_python_sdk.models.browse_node_child import BrowseNodeChild  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.browse_node_ancestor import BrowseNodeAncestor  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.browse_node_child import BrowseNodeChild  # noqa: F401,E501
 
 
 class BrowseNode(object):

@@ -28,8 +28,8 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.get_browse_nodes_resource import GetBrowseNodesResource  # noqa: F401,E501
-from paapi5_python_sdk.models.partner_type import PartnerType  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.get_browse_nodes_resource import GetBrowseNodesResource  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.partner_type import PartnerType  # noqa: F401,E501
 
 
 class GetBrowseNodesRequest(object):

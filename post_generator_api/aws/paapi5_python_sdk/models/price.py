@@ -1,34 +1,27 @@
-# coding: utf-8
-
 """
-  Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-  Licensed under the Apache License, Version 2.0 (the "License").
-  You may not use this file except in compliance with the License.
-  A copy of the License is located at
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License is located at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-  or in the "license" file accompanying this file. This file is distributed
-  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-  express or implied. See the License for the specific language governing
-  permissions and limitations under the License.
-"""
+or in the "license" file accompanying this file. This file is distributed
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+express or implied. See the License for the specific language governing
+permissions and limitations under the License.
 
-
-"""
-    ProductAdvertisingAPI
+ProductAdvertisingAPI
 
     https://webservices.amazon.com/paapi5/documentation/index.html  # noqa: E501
 """
-
 
 import pprint
 import re  # noqa: F401
 
 import six
-
-from paapi5_python_sdk.models.offer_price import OfferPrice  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_price import OfferPrice  # noqa: F401,E501
 
 
 class Price(object):
@@ -70,7 +63,6 @@ class Price(object):
     def highest_price(self):
         """Gets the highest_price of this Price.  # noqa: E501
 
-
         :return: The highest_price of this Price.  # noqa: E501
         :rtype: OfferPrice
         """
@@ -80,17 +72,14 @@ class Price(object):
     def highest_price(self, highest_price):
         """Sets the highest_price of this Price.
 
-
         :param highest_price: The highest_price of this Price.  # noqa: E501
         :type: OfferPrice
         """
-
         self._highest_price = highest_price
 
     @property
     def lowest_price(self):
         """Gets the lowest_price of this Price.  # noqa: E501
-
 
         :return: The lowest_price of this Price.  # noqa: E501
         :rtype: OfferPrice
@@ -101,11 +90,9 @@ class Price(object):
     def lowest_price(self, lowest_price):
         """Sets the lowest_price of this Price.
 
-
         :param lowest_price: The lowest_price of this Price.  # noqa: E501
         :type: OfferPrice
         """
-
         self._lowest_price = lowest_price
 
     def to_dict(self):

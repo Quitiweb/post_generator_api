@@ -28,7 +28,7 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.image_type import ImageType  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.image_type import ImageType  # noqa: F401,E501
 
 
 class Images(object):

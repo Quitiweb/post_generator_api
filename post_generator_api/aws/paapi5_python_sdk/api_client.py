@@ -1,26 +1,20 @@
-# coding: utf-8
-
-# flake8: noqa
-
 from __future__ import absolute_import
 
 """
-  Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-  Licensed under the Apache License, Version 2.0 (the "License").
-  You may not use this file except in compliance with the License.
-  A copy of the License is located at
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License is located at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-  or in the "license" file accompanying this file. This file is distributed
-  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-  express or implied. See the License for the specific language governing
-  permissions and limitations under the License.
-"""
+or in the "license" file accompanying this file. This file is distributed
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+express or implied. See the License for the specific language governing
+permissions and limitations under the License.
 
-"""
-    ProductAdvertisingAPI
+ProductAdvertisingAPI
 
     https://webservices.amazon.com/paapi5/documentation/index.html  # noqa: E501
 """
@@ -37,11 +31,12 @@ import tempfile
 import six
 from six.moves.urllib.parse import quote
 
-from paapi5_python_sdk.configuration import Configuration
-import paapi5_python_sdk.models
-from paapi5_python_sdk import rest
+from aws.paapi5_python_sdk.configuration import Configuration
+import aws.paapi5_python_sdk.models
+from aws.paapi5_python_sdk import rest
 
-from paapi5_python_sdk.auth.sign_helper import AWSV4Auth
+from aws.paapi5_python_sdk.auth.sign_helper import AWSV4Auth
+
 
 class ApiClient(object):
     """Generic API client for Swagger client library builds.
@@ -288,7 +283,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(paapi5_python_sdk.models, klass)
+                klass = getattr(aws.paapi5_python_sdk.models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)
@@ -352,13 +347,13 @@ class ApiClient(object):
                                    _preload_content, _request_timeout)
         else:
             thread = self.pool.apply_async(self.__call_api, (resource_path,
-                                           method, api_name, path_params, query_params,
-                                           header_params, body,
-                                           post_params, files,
-                                           response_type, auth_settings,
-                                           _return_http_data_only,
-                                           collection_formats,
-                                           _preload_content, _request_timeout))
+                                                             method, api_name, path_params, query_params,
+                                                             header_params, body,
+                                                             post_params, files,
+                                                             response_type, auth_settings,
+                                                             _return_http_data_only,
+                                                             collection_formats,
+                                                             _preload_content, _request_timeout))
         return thread
 
     def request(self, method, url, query_params=None, headers=None,
@@ -531,15 +526,15 @@ class ApiClient(object):
             headers['host'] = self.host
             headers['x-amz-date'] = self.get_amz_date(utc_timestamp)
             aws_v4_auth = AWSV4Auth(access_key=self.access_key,
-                                  secret_key=self.secret_key,
-                                  host=self.host,
-                                  region=self.region,
-                                  service=service,
-                                  method_name=method,
-                                  timestamp=utc_timestamp,
-                                  headers=headers,
-                                  payload=self.sanitize_for_serialization(body),
-                                  path=resource_path)
+                                    secret_key=self.secret_key,
+                                    host=self.host,
+                                    region=self.region,
+                                    service=service,
+                                    method_name=method,
+                                    timestamp=utc_timestamp,
+                                    headers=headers,
+                                    payload=self.sanitize_for_serialization(body),
+                                    path=resource_path)
             auth_headers = aws_v4_auth.get_headers()
 
             return
@@ -594,11 +589,11 @@ class ApiClient(object):
             return klass(data)
         except UnicodeEncodeError:
             return six.text_type(data)
-            #try:
-                #return unicode(data.replace(r'\\', r'\\\\'), "unicode_escape")
-            #except TypeError as e:
-                #if "decoding Unicode is not supported" in str(e):
-                    #return unicode(data.replace(r'\\', r'\\\\'))
+            # try:
+            # return unicode(data.replace(r'\\', r'\\\\'), "unicode_escape")
+            # except TypeError as e:
+            # if "decoding Unicode is not supported" in str(e):
+            # return unicode(data.replace(r'\\', r'\\\\'))
         except TypeError:
             return data
 

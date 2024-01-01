@@ -1,36 +1,28 @@
-# coding: utf-8
-
-# flake8: noqa
-
 from __future__ import absolute_import
 
 """
-  Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-  Licensed under the Apache License, Version 2.0 (the "License").
-  You may not use this file except in compliance with the License.
-  A copy of the License is located at
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License is located at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-  or in the "license" file accompanying this file. This file is distributed
-  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-  express or implied. See the License for the specific language governing
-  permissions and limitations under the License.
-"""
+or in the "license" file accompanying this file. This file is distributed
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+express or implied. See the License for the specific language governing
+permissions and limitations under the License.
 
-"""
-    ProductAdvertisingAPI
+ProductAdvertisingAPI
 
     https://webservices.amazon.com/paapi5/documentation/index.html  # noqa: E501
 """
-
 
 import copy
 import logging
 import multiprocessing
 import sys
-import urllib3
 
 import six
 from six.moves import http_client as httplib
@@ -63,9 +55,8 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
         self.host = "https://webservices.amazon.com"
 
         # Logging Settings
-        self.logger = {}
-        self.logger["package_logger"] = logging.getLogger("paapi5_python_sdk")
-        self.logger["urllib3_logger"] = logging.getLogger("urllib3")
+        self.logger = {"package_logger": logging.getLogger("aws.paapi5_python_sdk"),
+                       "urllib3_logger": logging.getLogger("urllib3")}
         # Log format
         self.logger_format = '%(asctime)s %(levelname)s %(message)s'
         # Log stream handler
@@ -225,9 +216,9 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
 
         :return: The report for debugging.
         """
-        return "Python SDK Debug Report:\n"\
-               "OS: {env}\n"\
-               "Python Version: {pyversion}\n"\
-               "Version of the API: 1.0.0\n"\
-               "SDK Package Version: 1.0.0".\
-               format(env=sys.platform, pyversion=sys.version)
+        return "Python SDK Debug Report:\n" \
+               "OS: {env}\n" \
+               "Python Version: {pyversion}\n" \
+               "Version of the API: 1.0.0\n" \
+               "SDK Package Version: 1.0.0". \
+            format(env=sys.platform, pyversion=sys.version)

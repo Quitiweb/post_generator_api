@@ -28,14 +28,14 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.offer_availability import OfferAvailability  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_condition import OfferCondition  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_delivery_info import OfferDeliveryInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_loyalty_points import OfferLoyaltyPoints  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_merchant_info import OfferMerchantInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_price import OfferPrice  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_program_eligibility import OfferProgramEligibility  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_promotion import OfferPromotion  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_availability import OfferAvailability  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_condition import OfferCondition  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_delivery_info import OfferDeliveryInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_loyalty_points import OfferLoyaltyPoints  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_merchant_info import OfferMerchantInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_price import OfferPrice  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_program_eligibility import OfferProgramEligibility  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_promotion import OfferPromotion  # noqa: F401,E501
 
 
 class OfferListing(object):

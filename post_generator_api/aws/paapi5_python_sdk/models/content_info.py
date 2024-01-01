@@ -28,9 +28,9 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.languages import Languages  # noqa: F401,E501
-from paapi5_python_sdk.models.single_integer_valued_attribute import SingleIntegerValuedAttribute  # noqa: F401,E501
-from paapi5_python_sdk.models.single_string_valued_attribute import SingleStringValuedAttribute  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.languages import Languages  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.single_integer_valued_attribute import SingleIntegerValuedAttribute  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.single_string_valued_attribute import SingleStringValuedAttribute  # noqa: F401,E501
 
 
 class ContentInfo(object):

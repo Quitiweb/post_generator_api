@@ -28,8 +28,8 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.item import Item  # noqa: F401,E501
-from paapi5_python_sdk.models.search_refinements import SearchRefinements  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.item import Item  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.search_refinements import SearchRefinements  # noqa: F401,E501
 
 
 class SearchResult(object):

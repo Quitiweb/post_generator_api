@@ -1,40 +1,33 @@
-# coding: utf-8
-
 """
-  Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-  Licensed under the Apache License, Version 2.0 (the "License").
-  You may not use this file except in compliance with the License.
-  A copy of the License is located at
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License is located at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-  or in the "license" file accompanying this file. This file is distributed
-  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-  express or implied. See the License for the specific language governing
-  permissions and limitations under the License.
-"""
+or in the "license" file accompanying this file. This file is distributed
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+express or implied. See the License for the specific language governing
+permissions and limitations under the License.
 
-
-"""
-    ProductAdvertisingAPI
+ProductAdvertisingAPI
 
     https://webservices.amazon.com/paapi5/documentation/index.html  # noqa: E501
 """
-
 
 import pprint
 import re  # noqa: F401
 
 import six
-
-from paapi5_python_sdk.models.condition import Condition  # noqa: F401,E501
-from paapi5_python_sdk.models.get_items_resource import GetItemsResource  # noqa: F401,E501
-from paapi5_python_sdk.models.item_id_type import ItemIdType  # noqa: F401,E501
-from paapi5_python_sdk.models.merchant import Merchant  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_count import OfferCount  # noqa: F401,E501
-from paapi5_python_sdk.models.partner_type import PartnerType  # noqa: F401,E501
-from paapi5_python_sdk.models.properties import Properties  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.condition import Condition  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.get_items_resource import GetItemsResource  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.item_id_type import ItemIdType  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.merchant import Merchant  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_count import OfferCount  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.partner_type import PartnerType  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.properties import Properties  # noqa: F401,E501
 
 
 class GetItemsRequest(object):
@@ -80,7 +73,9 @@ class GetItemsRequest(object):
         'resources': 'Resources'
     }
 
-    def __init__(self, condition=None, currency_of_preference=None, item_ids=None, item_id_type=None, languages_of_preference=None, marketplace=None, merchant=None, offer_count=None, partner_tag=None, partner_type=None, properties=None, resources=None):  # noqa: E501
+    def __init__(self, condition=None, currency_of_preference=None, item_ids=None, item_id_type=None,
+                 languages_of_preference=None, marketplace=None, merchant=None, offer_count=None, partner_tag=None,
+                 partner_type=None, properties=None, resources=None):  # noqa: E501
         """GetItemsRequest - a model defined in Swagger"""  # noqa: E501
 
         self._condition = None
@@ -123,7 +118,6 @@ class GetItemsRequest(object):
     def condition(self):
         """Gets the condition of this GetItemsRequest.  # noqa: E501
 
-
         :return: The condition of this GetItemsRequest.  # noqa: E501
         :rtype: Condition
         """
@@ -133,17 +127,14 @@ class GetItemsRequest(object):
     def condition(self, condition):
         """Sets the condition of this GetItemsRequest.
 
-
         :param condition: The condition of this GetItemsRequest.  # noqa: E501
         :type: Condition
         """
-
         self._condition = condition
 
     @property
     def currency_of_preference(self):
         """Gets the currency_of_preference of this GetItemsRequest.  # noqa: E501
-
 
         :return: The currency_of_preference of this GetItemsRequest.  # noqa: E501
         :rtype: str
@@ -154,17 +145,14 @@ class GetItemsRequest(object):
     def currency_of_preference(self, currency_of_preference):
         """Sets the currency_of_preference of this GetItemsRequest.
 
-
         :param currency_of_preference: The currency_of_preference of this GetItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._currency_of_preference = currency_of_preference
 
     @property
     def item_ids(self):
         """Gets the item_ids of this GetItemsRequest.  # noqa: E501
-
 
         :return: The item_ids of this GetItemsRequest.  # noqa: E501
         :rtype: list[str]
@@ -174,7 +162,6 @@ class GetItemsRequest(object):
     @item_ids.setter
     def item_ids(self, item_ids):
         """Sets the item_ids of this GetItemsRequest.
-
 
         :param item_ids: The item_ids of this GetItemsRequest.  # noqa: E501
         :type: list[str]
@@ -188,7 +175,6 @@ class GetItemsRequest(object):
     def item_id_type(self):
         """Gets the item_id_type of this GetItemsRequest.  # noqa: E501
 
-
         :return: The item_id_type of this GetItemsRequest.  # noqa: E501
         :rtype: ItemIdType
         """
@@ -198,17 +184,14 @@ class GetItemsRequest(object):
     def item_id_type(self, item_id_type):
         """Sets the item_id_type of this GetItemsRequest.
 
-
         :param item_id_type: The item_id_type of this GetItemsRequest.  # noqa: E501
         :type: ItemIdType
         """
-
         self._item_id_type = item_id_type
 
     @property
     def languages_of_preference(self):
         """Gets the languages_of_preference of this GetItemsRequest.  # noqa: E501
-
 
         :return: The languages_of_preference of this GetItemsRequest.  # noqa: E501
         :rtype: list[str]
@@ -219,17 +202,14 @@ class GetItemsRequest(object):
     def languages_of_preference(self, languages_of_preference):
         """Sets the languages_of_preference of this GetItemsRequest.
 
-
         :param languages_of_preference: The languages_of_preference of this GetItemsRequest.  # noqa: E501
         :type: list[str]
         """
-
         self._languages_of_preference = languages_of_preference
 
     @property
     def marketplace(self):
         """Gets the marketplace of this GetItemsRequest.  # noqa: E501
-
 
         :return: The marketplace of this GetItemsRequest.  # noqa: E501
         :rtype: str
@@ -239,7 +219,6 @@ class GetItemsRequest(object):
     @marketplace.setter
     def marketplace(self, marketplace):
         """Sets the marketplace of this GetItemsRequest.
-
 
         :param marketplace: The marketplace of this GetItemsRequest.  # noqa: E501
         :type: str
@@ -251,7 +230,6 @@ class GetItemsRequest(object):
     def merchant(self):
         """Gets the merchant of this GetItemsRequest.  # noqa: E501
 
-
         :return: The merchant of this GetItemsRequest.  # noqa: E501
         :rtype: Merchant
         """
@@ -261,17 +239,14 @@ class GetItemsRequest(object):
     def merchant(self, merchant):
         """Sets the merchant of this GetItemsRequest.
 
-
         :param merchant: The merchant of this GetItemsRequest.  # noqa: E501
         :type: Merchant
         """
-
         self._merchant = merchant
 
     @property
     def offer_count(self):
         """Gets the offer_count of this GetItemsRequest.  # noqa: E501
-
 
         :return: The offer_count of this GetItemsRequest.  # noqa: E501
         :rtype: OfferCount
@@ -282,17 +257,14 @@ class GetItemsRequest(object):
     def offer_count(self, offer_count):
         """Sets the offer_count of this GetItemsRequest.
 
-
         :param offer_count: The offer_count of this GetItemsRequest.  # noqa: E501
         :type: OfferCount
         """
-
         self._offer_count = offer_count
 
     @property
     def partner_tag(self):
         """Gets the partner_tag of this GetItemsRequest.  # noqa: E501
-
 
         :return: The partner_tag of this GetItemsRequest.  # noqa: E501
         :rtype: str
@@ -302,7 +274,6 @@ class GetItemsRequest(object):
     @partner_tag.setter
     def partner_tag(self, partner_tag):
         """Sets the partner_tag of this GetItemsRequest.
-
 
         :param partner_tag: The partner_tag of this GetItemsRequest.  # noqa: E501
         :type: str
@@ -316,7 +287,6 @@ class GetItemsRequest(object):
     def partner_type(self):
         """Gets the partner_type of this GetItemsRequest.  # noqa: E501
 
-
         :return: The partner_type of this GetItemsRequest.  # noqa: E501
         :rtype: PartnerType
         """
@@ -325,7 +295,6 @@ class GetItemsRequest(object):
     @partner_type.setter
     def partner_type(self, partner_type):
         """Sets the partner_type of this GetItemsRequest.
-
 
         :param partner_type: The partner_type of this GetItemsRequest.  # noqa: E501
         :type: PartnerType
@@ -339,7 +308,6 @@ class GetItemsRequest(object):
     def properties(self):
         """Gets the properties of this GetItemsRequest.  # noqa: E501
 
-
         :return: The properties of this GetItemsRequest.  # noqa: E501
         :rtype: Properties
         """
@@ -349,17 +317,14 @@ class GetItemsRequest(object):
     def properties(self, properties):
         """Sets the properties of this GetItemsRequest.
 
-
         :param properties: The properties of this GetItemsRequest.  # noqa: E501
         :type: Properties
         """
-
         self._properties = properties
 
     @property
     def resources(self):
         """Gets the resources of this GetItemsRequest.  # noqa: E501
-
 
         :return: The resources of this GetItemsRequest.  # noqa: E501
         :rtype: list[GetItemsResource]
@@ -370,11 +335,9 @@ class GetItemsRequest(object):
     def resources(self, resources):
         """Sets the resources of this GetItemsRequest.
 
-
         :param resources: The resources of this GetItemsRequest.  # noqa: E501
         :type: list[GetItemsResource]
         """
-
         self._resources = resources
 
     def to_dict(self):

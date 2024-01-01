@@ -28,8 +28,8 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.multi_valued_attribute import MultiValuedAttribute  # noqa: F401,E501
-from paapi5_python_sdk.models.single_string_valued_attribute import SingleStringValuedAttribute  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.multi_valued_attribute import MultiValuedAttribute  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.single_string_valued_attribute import SingleStringValuedAttribute  # noqa: F401,E501
 
 
 class TechnicalInfo(object):

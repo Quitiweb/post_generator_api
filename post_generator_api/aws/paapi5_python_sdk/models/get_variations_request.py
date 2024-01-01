@@ -28,12 +28,12 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.condition import Condition  # noqa: F401,E501
-from paapi5_python_sdk.models.get_variations_resource import GetVariationsResource  # noqa: F401,E501
-from paapi5_python_sdk.models.merchant import Merchant  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_count import OfferCount  # noqa: F401,E501
-from paapi5_python_sdk.models.partner_type import PartnerType  # noqa: F401,E501
-from paapi5_python_sdk.models.properties import Properties  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.condition import Condition  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.get_variations_resource import GetVariationsResource  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.merchant import Merchant  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_count import OfferCount  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.partner_type import PartnerType  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.properties import Properties  # noqa: F401,E501
 
 
 class GetVariationsRequest(object):

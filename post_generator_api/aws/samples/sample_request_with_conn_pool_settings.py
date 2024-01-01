@@ -1,66 +1,99 @@
-from __future__ import print_function
+# -*- coding: utf-8 -*-
 
-from decouple import config
+"""
+ Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License").
+ You may not use this file except in compliance with the License.
+ A copy of the License is located at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ or in the "license" file accompanying this file. This file is distributed
+ on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ express or implied. See the License for the specific language governing
+ permissions and limitations under the License.
+"""
+
+"""
+ ProductAdvertisingAPI
+ 
+ https://webservices.amazon.com/paapi5/documentation/index.html
+ 
+"""
+
+"""
+This sample code snippet is for ProductAdvertisingAPI 5.0's SearchItems API
+
+For more details, refer:
+https://webservices.amazon.com/paapi5/documentation/search-items.html
+
+"""
+
 from aws.paapi5_python_sdk.api.default_api import DefaultApi
+from aws.paapi5_python_sdk.api_client import ApiClient
+from aws.paapi5_python_sdk.configuration import Configuration
+from aws.paapi5_python_sdk.models.partner_type import PartnerType
 from aws.paapi5_python_sdk.models.search_items_request import SearchItemsRequest
 from aws.paapi5_python_sdk.models.search_items_resource import SearchItemsResource
-from aws.paapi5_python_sdk.models.partner_type import PartnerType
 from aws.paapi5_python_sdk.rest import ApiException
 
 
 def search_items():
-    """
-    Simple example for SearchItems to discover Amazon products with the keyword 'Harry Potter'
-    in All categories
 
-    :return: None
-    """
+    """ Following are your credentials """
+    """ Please add your access key here """
+    access_key = "<YOUR ACCESS KEY>"
 
-    # AWS credentials
-    access_key = config("ACCESS_KEY")
-    secret_key = config("SECRET_KEY")
-    partner_tag = config("PARTNER_TAG")
+    """ Please add your secret key here """
+    secret_key = "<YOUR SECRET KEY>"
 
-    """
-    PAAPI Host and Region to which you want to send request
+    """ Please add your partner tag (store/tracking id) here """
+    partner_tag = "<YOUR PARTNER TAG>"
 
-    For more details refer:
-    https://webservices.amazon.es/paapi5/documentation/common-request-parameters.html#host-and-region
-    """
-    host = config("HOST")
-    region = config("REGION")
+    """ PAAPI host and region to which you want to send request """
+    """ For more details refer: https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region """
+    host = "webservices.amazon.com"
+    region = "us-east-1"
 
-    # API declaration
-    default_api = DefaultApi(
-        access_key=access_key, secret_key=secret_key, host=host, region=region
+    """ You can specify max connection pool size here. By default it's cpu_count * 5."""
+    connetion_pool_max_size = 12
+    configuration = Configuration()
+    configuration.__init__(connetion_pool_max_size)
+
+    """ API Client Declaration """
+    api_client = ApiClient(
+        access_key=access_key,
+        secret_key=secret_key,
+        host=host,
+        region=region,
+        configuration=configuration,
     )
 
-    # Request initialization
+    """ API declaration """
+    default_api = DefaultApi(api_client=api_client)
+
+    """ Request initialization"""
+
+    """ Specify keywords """
     keywords = "Harry Potter"
 
-    """
-    Specify the category in which search request is to be made
-
-    For more details, refer:
-    https://webservices.amazon.es/paapi5/documentation/use-cases/organization-of-items-on-amazon/search-index.html
-    """
+    """ Specify the category in which search request is to be made """
+    """ For more details, refer: https://webservices.amazon.com/paapi5/documentation/use-cases/organization-of-items-on-amazon/search-index.html """
     search_index = "All"
 
-    # Specify item count to be returned in search result
+    """ Specify item count to be returned in search result """
     item_count = 1
 
-    """ Choose resources you want from SearchItemsResource enum
-
-    For more details, refer:
-    https://webservices.amazon.es/paapi5/documentation/search-items.html#resources-parameter
-    """
+    """ Choose resources you want from SearchItemsResource enum """
+    """ For more details, refer: https://webservices.amazon.com/paapi5/documentation/search-items.html#resources-parameter """
     search_items_resource = [
         SearchItemsResource.IMAGES_PRIMARY_LARGE,
         SearchItemsResource.ITEMINFO_TITLE,
         SearchItemsResource.OFFERS_LISTINGS_PRICE,
     ]
 
-    # Forming request
+    """ Forming request """
     try:
         search_items_request = SearchItemsRequest(
             partner_tag=partner_tag,
@@ -75,13 +108,13 @@ def search_items():
         return
 
     try:
-        # Sending request
+        """ Sending request """
         response = default_api.search_items(search_items_request)
 
         print("API called Successfully")
         print("Complete Response:", response)
 
-        # Parse response
+        """ Parse response """
         if response.search_result is not None:
             print("Printing first item information in SearchResult:")
             item_0 = response.search_result.items[0]

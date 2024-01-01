@@ -28,8 +28,8 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.offer_savings import OfferSavings  # noqa: F401,E501
-from paapi5_python_sdk.models.price_type import PriceType  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_savings import OfferSavings  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.price_type import PriceType  # noqa: F401,E501
 
 
 class OfferPrice(object):

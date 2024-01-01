@@ -1,46 +1,39 @@
-# coding: utf-8
-
 """
-  Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-  Licensed under the Apache License, Version 2.0 (the "License").
-  You may not use this file except in compliance with the License.
-  A copy of the License is located at
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License is located at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-  or in the "license" file accompanying this file. This file is distributed
-  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-  express or implied. See the License for the specific language governing
-  permissions and limitations under the License.
-"""
+or in the "license" file accompanying this file. This file is distributed
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+express or implied. See the License for the specific language governing
+permissions and limitations under the License.
 
-
-"""
-    ProductAdvertisingAPI
+ProductAdvertisingAPI
 
     https://webservices.amazon.com/paapi5/documentation/index.html  # noqa: E501
 """
-
 
 import pprint
 import re  # noqa: F401
 
 import six
-
-from paapi5_python_sdk.models.availability import Availability  # noqa: F401,E501
-from paapi5_python_sdk.models.condition import Condition  # noqa: F401,E501
-from paapi5_python_sdk.models.delivery_flag import DeliveryFlag  # noqa: F401,E501
-from paapi5_python_sdk.models.max_price import MaxPrice  # noqa: F401,E501
-from paapi5_python_sdk.models.merchant import Merchant  # noqa: F401,E501
-from paapi5_python_sdk.models.min_price import MinPrice  # noqa: F401,E501
-from paapi5_python_sdk.models.min_reviews_rating import MinReviewsRating  # noqa: F401,E501
-from paapi5_python_sdk.models.min_saving_percent import MinSavingPercent  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_count import OfferCount  # noqa: F401,E501
-from paapi5_python_sdk.models.partner_type import PartnerType  # noqa: F401,E501
-from paapi5_python_sdk.models.properties import Properties  # noqa: F401,E501
-from paapi5_python_sdk.models.search_items_resource import SearchItemsResource  # noqa: F401,E501
-from paapi5_python_sdk.models.sort_by import SortBy  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.availability import Availability  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.condition import Condition  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.delivery_flag import DeliveryFlag  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.max_price import MaxPrice  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.merchant import Merchant  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.min_price import MinPrice  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.min_reviews_rating import MinReviewsRating  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.min_saving_percent import MinSavingPercent  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_count import OfferCount  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.partner_type import PartnerType  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.properties import Properties  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.search_items_resource import SearchItemsResource  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.sort_by import SortBy  # noqa: F401,E501
 
 
 class SearchItemsRequest(object):
@@ -116,7 +109,12 @@ class SearchItemsRequest(object):
         'title': 'Title'
     }
 
-    def __init__(self, actor=None, artist=None, author=None, availability=None, brand=None, browse_node_id=None, condition=None, currency_of_preference=None, delivery_flags=None, item_count=None, item_page=None, keywords=None, languages_of_preference=None, marketplace=None, max_price=None, merchant=None, min_price=None, min_reviews_rating=None, min_saving_percent=None, offer_count=None, partner_tag=None, partner_type=None, properties=None, resources=None, search_index=None, sort_by=None, title=None):  # noqa: E501
+    def __init__(self, actor=None, artist=None, author=None, availability=None, brand=None, browse_node_id=None,
+                 condition=None, currency_of_preference=None, delivery_flags=None, item_count=None, item_page=None,
+                 keywords=None, languages_of_preference=None, marketplace=None, max_price=None, merchant=None,
+                 min_price=None, min_reviews_rating=None, min_saving_percent=None, offer_count=None, partner_tag=None,
+                 partner_type=None, properties=None, resources=None, search_index=None, sort_by=None,
+                 title=None):  # noqa: E501
         """SearchItemsRequest - a model defined in Swagger"""  # noqa: E501
 
         self._actor = None
@@ -205,7 +203,6 @@ class SearchItemsRequest(object):
     def actor(self):
         """Gets the actor of this SearchItemsRequest.  # noqa: E501
 
-
         :return: The actor of this SearchItemsRequest.  # noqa: E501
         :rtype: str
         """
@@ -215,17 +212,14 @@ class SearchItemsRequest(object):
     def actor(self, actor):
         """Sets the actor of this SearchItemsRequest.
 
-
         :param actor: The actor of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._actor = actor
 
     @property
     def artist(self):
         """Gets the artist of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The artist of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -236,17 +230,14 @@ class SearchItemsRequest(object):
     def artist(self, artist):
         """Sets the artist of this SearchItemsRequest.
 
-
         :param artist: The artist of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._artist = artist
 
     @property
     def author(self):
         """Gets the author of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The author of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -257,17 +248,14 @@ class SearchItemsRequest(object):
     def author(self, author):
         """Sets the author of this SearchItemsRequest.
 
-
         :param author: The author of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._author = author
 
     @property
     def availability(self):
         """Gets the availability of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The availability of this SearchItemsRequest.  # noqa: E501
         :rtype: Availability
@@ -278,17 +266,14 @@ class SearchItemsRequest(object):
     def availability(self, availability):
         """Sets the availability of this SearchItemsRequest.
 
-
         :param availability: The availability of this SearchItemsRequest.  # noqa: E501
         :type: Availability
         """
-
         self._availability = availability
 
     @property
     def brand(self):
         """Gets the brand of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The brand of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -299,17 +284,14 @@ class SearchItemsRequest(object):
     def brand(self, brand):
         """Sets the brand of this SearchItemsRequest.
 
-
         :param brand: The brand of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._brand = brand
 
     @property
     def browse_node_id(self):
         """Gets the browse_node_id of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The browse_node_id of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -320,17 +302,14 @@ class SearchItemsRequest(object):
     def browse_node_id(self, browse_node_id):
         """Sets the browse_node_id of this SearchItemsRequest.
 
-
         :param browse_node_id: The browse_node_id of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._browse_node_id = browse_node_id
 
     @property
     def condition(self):
         """Gets the condition of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The condition of this SearchItemsRequest.  # noqa: E501
         :rtype: Condition
@@ -341,17 +320,14 @@ class SearchItemsRequest(object):
     def condition(self, condition):
         """Sets the condition of this SearchItemsRequest.
 
-
         :param condition: The condition of this SearchItemsRequest.  # noqa: E501
         :type: Condition
         """
-
         self._condition = condition
 
     @property
     def currency_of_preference(self):
         """Gets the currency_of_preference of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The currency_of_preference of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -366,13 +342,11 @@ class SearchItemsRequest(object):
         :param currency_of_preference: The currency_of_preference of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._currency_of_preference = currency_of_preference
 
     @property
     def delivery_flags(self):
         """Gets the delivery_flags of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The delivery_flags of this SearchItemsRequest.  # noqa: E501
         :rtype: list[DeliveryFlag]
@@ -383,17 +357,14 @@ class SearchItemsRequest(object):
     def delivery_flags(self, delivery_flags):
         """Sets the delivery_flags of this SearchItemsRequest.
 
-
         :param delivery_flags: The delivery_flags of this SearchItemsRequest.  # noqa: E501
         :type: list[DeliveryFlag]
         """
-
         self._delivery_flags = delivery_flags
 
     @property
     def item_count(self):
         """Gets the item_count of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The item_count of this SearchItemsRequest.  # noqa: E501
         :rtype: int
@@ -404,17 +375,14 @@ class SearchItemsRequest(object):
     def item_count(self, item_count):
         """Sets the item_count of this SearchItemsRequest.
 
-
         :param item_count: The item_count of this SearchItemsRequest.  # noqa: E501
         :type: int
         """
-
         self._item_count = item_count
 
     @property
     def item_page(self):
         """Gets the item_page of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The item_page of this SearchItemsRequest.  # noqa: E501
         :rtype: int
@@ -425,17 +393,14 @@ class SearchItemsRequest(object):
     def item_page(self, item_page):
         """Sets the item_page of this SearchItemsRequest.
 
-
         :param item_page: The item_page of this SearchItemsRequest.  # noqa: E501
         :type: int
         """
-
         self._item_page = item_page
 
     @property
     def keywords(self):
         """Gets the keywords of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The keywords of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -446,17 +411,14 @@ class SearchItemsRequest(object):
     def keywords(self, keywords):
         """Sets the keywords of this SearchItemsRequest.
 
-
         :param keywords: The keywords of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._keywords = keywords
 
     @property
     def languages_of_preference(self):
         """Gets the languages_of_preference of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The languages_of_preference of this SearchItemsRequest.  # noqa: E501
         :rtype: list[str]
@@ -471,13 +433,11 @@ class SearchItemsRequest(object):
         :param languages_of_preference: The languages_of_preference of this SearchItemsRequest.  # noqa: E501
         :type: list[str]
         """
-
         self._languages_of_preference = languages_of_preference
 
     @property
     def marketplace(self):
         """Gets the marketplace of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The marketplace of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -488,17 +448,14 @@ class SearchItemsRequest(object):
     def marketplace(self, marketplace):
         """Sets the marketplace of this SearchItemsRequest.
 
-
         :param marketplace: The marketplace of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._marketplace = marketplace
 
     @property
     def max_price(self):
         """Gets the max_price of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The max_price of this SearchItemsRequest.  # noqa: E501
         :rtype: MaxPrice
@@ -509,17 +466,14 @@ class SearchItemsRequest(object):
     def max_price(self, max_price):
         """Sets the max_price of this SearchItemsRequest.
 
-
         :param max_price: The max_price of this SearchItemsRequest.  # noqa: E501
         :type: MaxPrice
         """
-
         self._max_price = max_price
 
     @property
     def merchant(self):
         """Gets the merchant of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The merchant of this SearchItemsRequest.  # noqa: E501
         :rtype: Merchant
@@ -530,17 +484,14 @@ class SearchItemsRequest(object):
     def merchant(self, merchant):
         """Sets the merchant of this SearchItemsRequest.
 
-
         :param merchant: The merchant of this SearchItemsRequest.  # noqa: E501
         :type: Merchant
         """
-
         self._merchant = merchant
 
     @property
     def min_price(self):
         """Gets the min_price of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The min_price of this SearchItemsRequest.  # noqa: E501
         :rtype: MinPrice
@@ -551,17 +502,14 @@ class SearchItemsRequest(object):
     def min_price(self, min_price):
         """Sets the min_price of this SearchItemsRequest.
 
-
         :param min_price: The min_price of this SearchItemsRequest.  # noqa: E501
         :type: MinPrice
         """
-
         self._min_price = min_price
 
     @property
     def min_reviews_rating(self):
         """Gets the min_reviews_rating of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The min_reviews_rating of this SearchItemsRequest.  # noqa: E501
         :rtype: MinReviewsRating
@@ -572,17 +520,14 @@ class SearchItemsRequest(object):
     def min_reviews_rating(self, min_reviews_rating):
         """Sets the min_reviews_rating of this SearchItemsRequest.
 
-
         :param min_reviews_rating: The min_reviews_rating of this SearchItemsRequest.  # noqa: E501
         :type: MinReviewsRating
         """
-
         self._min_reviews_rating = min_reviews_rating
 
     @property
     def min_saving_percent(self):
         """Gets the min_saving_percent of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The min_saving_percent of this SearchItemsRequest.  # noqa: E501
         :rtype: MinSavingPercent
@@ -593,17 +538,14 @@ class SearchItemsRequest(object):
     def min_saving_percent(self, min_saving_percent):
         """Sets the min_saving_percent of this SearchItemsRequest.
 
-
         :param min_saving_percent: The min_saving_percent of this SearchItemsRequest.  # noqa: E501
         :type: MinSavingPercent
         """
-
         self._min_saving_percent = min_saving_percent
 
     @property
     def offer_count(self):
         """Gets the offer_count of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The offer_count of this SearchItemsRequest.  # noqa: E501
         :rtype: OfferCount
@@ -614,17 +556,14 @@ class SearchItemsRequest(object):
     def offer_count(self, offer_count):
         """Sets the offer_count of this SearchItemsRequest.
 
-
         :param offer_count: The offer_count of this SearchItemsRequest.  # noqa: E501
         :type: OfferCount
         """
-
         self._offer_count = offer_count
 
     @property
     def partner_tag(self):
         """Gets the partner_tag of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The partner_tag of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -634,7 +573,6 @@ class SearchItemsRequest(object):
     @partner_tag.setter
     def partner_tag(self, partner_tag):
         """Sets the partner_tag of this SearchItemsRequest.
-
 
         :param partner_tag: The partner_tag of this SearchItemsRequest.  # noqa: E501
         :type: str
@@ -648,7 +586,6 @@ class SearchItemsRequest(object):
     def partner_type(self):
         """Gets the partner_type of this SearchItemsRequest.  # noqa: E501
 
-
         :return: The partner_type of this SearchItemsRequest.  # noqa: E501
         :rtype: PartnerType
         """
@@ -657,7 +594,6 @@ class SearchItemsRequest(object):
     @partner_type.setter
     def partner_type(self, partner_type):
         """Sets the partner_type of this SearchItemsRequest.
-
 
         :param partner_type: The partner_type of this SearchItemsRequest.  # noqa: E501
         :type: PartnerType
@@ -671,7 +607,6 @@ class SearchItemsRequest(object):
     def properties(self):
         """Gets the properties of this SearchItemsRequest.  # noqa: E501
 
-
         :return: The properties of this SearchItemsRequest.  # noqa: E501
         :rtype: Properties
         """
@@ -680,7 +615,6 @@ class SearchItemsRequest(object):
     @properties.setter
     def properties(self, properties):
         """Sets the properties of this SearchItemsRequest.
-
 
         :param properties: The properties of this SearchItemsRequest.  # noqa: E501
         :type: Properties
@@ -692,7 +626,6 @@ class SearchItemsRequest(object):
     def resources(self):
         """Gets the resources of this SearchItemsRequest.  # noqa: E501
 
-
         :return: The resources of this SearchItemsRequest.  # noqa: E501
         :rtype: list[SearchItemsResource]
         """
@@ -702,17 +635,14 @@ class SearchItemsRequest(object):
     def resources(self, resources):
         """Sets the resources of this SearchItemsRequest.
 
-
         :param resources: The resources of this SearchItemsRequest.  # noqa: E501
         :type: list[SearchItemsResource]
         """
-
         self._resources = resources
 
     @property
     def search_index(self):
         """Gets the search_index of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The search_index of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -723,17 +653,14 @@ class SearchItemsRequest(object):
     def search_index(self, search_index):
         """Sets the search_index of this SearchItemsRequest.
 
-
         :param search_index: The search_index of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._search_index = search_index
 
     @property
     def sort_by(self):
         """Gets the sort_by of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The sort_by of this SearchItemsRequest.  # noqa: E501
         :rtype: SortBy
@@ -744,17 +671,14 @@ class SearchItemsRequest(object):
     def sort_by(self, sort_by):
         """Sets the sort_by of this SearchItemsRequest.
 
-
         :param sort_by: The sort_by of this SearchItemsRequest.  # noqa: E501
         :type: SortBy
         """
-
         self._sort_by = sort_by
 
     @property
     def title(self):
         """Gets the title of this SearchItemsRequest.  # noqa: E501
-
 
         :return: The title of this SearchItemsRequest.  # noqa: E501
         :rtype: str
@@ -765,11 +689,9 @@ class SearchItemsRequest(object):
     def title(self, title):
         """Sets the title of this SearchItemsRequest.
 
-
         :param title: The title of this SearchItemsRequest.  # noqa: E501
         :type: str
         """
-
         self._title = title
 
     def to_dict(self):

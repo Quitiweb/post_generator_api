@@ -1,45 +1,40 @@
-# coding: utf-8
-
-"""
-  Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-  Licensed under the Apache License, Version 2.0 (the "License").
-  You may not use this file except in compliance with the License.
-  A copy of the License is located at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  or in the "license" file accompanying this file. This file is distributed
-  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-  express or implied. See the License for the specific language governing
-  permissions and limitations under the License.
-"""
-
-"""
-ProductAdvertisingAPI
-
-https://webservices.amazon.com/paapi5/documentation/index.html
-
-"""
-
 import hashlib
 import hmac
 import json
 
+"""
+Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License is located at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+or in the "license" file accompanying this file. This file is distributed
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+express or implied. See the License for the specific language governing
+permissions and limitations under the License.
+
+ProductAdvertisingAPI
+
+    https://webservices.amazon.com/paapi5/documentation/index.html
+"""
+
 
 class AWSV4Auth:
     def __init__(
-        self,
-        access_key,
-        secret_key,
-        host,
-        region,
-        service,
-        method_name,
-        timestamp,
-        headers={},
-        path="",
-        payload="",
+            self,
+            access_key,
+            secret_key,
+            host,
+            region,
+            service,
+            method_name,
+            timestamp,
+            headers={},
+            path="",
+            payload="",
     ):
         self.access_key = access_key
         self.secret_key = secret_key
@@ -69,18 +64,18 @@ class AWSV4Auth:
         )
 
         authorization_header = (
-            self.algorithm
-            + " "
-            + "Credential="
-            + self.access_key
-            + "/"
-            + self.credential_scope
-            + ", "
-            + "SignedHeaders="
-            + self.signed_header
-            + ", "
-            + "Signature="
-            + signature
+                self.algorithm
+                + " "
+                + "Credential="
+                + self.access_key
+                + "/"
+                + self.credential_scope
+                + ", "
+                + "SignedHeaders="
+                + self.signed_header
+                + ", "
+                + "Signature="
+                + signature
         )
         self.headers["Authorization"] = authorization_header
         return self.headers
@@ -94,44 +89,44 @@ class AWSV4Auth:
         for key in sorted_keys:
             self.signed_header = self.signed_header + key.lower() + ";"
             canonical_header = (
-                canonical_header + key.lower() + ":" + self.headers[key] + "\n"
+                    canonical_header + key.lower() + ":" + self.headers[key] + "\n"
             )
         self.signed_header = self.signed_header[:-1]
         payload_hash = hashlib.sha256(
             json.dumps(self.payload).encode("utf-8")
         ).hexdigest()
         canonical_request = (
-            canonical_uri
-            + "\n"
-            + canonical_querystring
-            + "\n"
-            + canonical_header
-            + "\n"
-            + self.signed_header
-            + "\n"
-            + payload_hash
+                canonical_uri
+                + "\n"
+                + canonical_querystring
+                + "\n"
+                + canonical_header
+                + "\n"
+                + self.signed_header
+                + "\n"
+                + payload_hash
         )
         return canonical_request
 
     def prepare_string_to_sign(self, canonical_request):
         self.algorithm = "AWS4-HMAC-SHA256"
         self.credential_scope = (
-            self.xAmzDate
-            + "/"
-            + self.region
-            + "/"
-            + self.service
-            + "/"
-            + "aws4_request"
+                self.xAmzDate
+                + "/"
+                + self.region
+                + "/"
+                + self.service
+                + "/"
+                + "aws4_request"
         )
         string_to_sign = (
-            self.algorithm
-            + "\n"
-            + self.xAmzDateTime
-            + "\n"
-            + self.credential_scope
-            + "\n"
-            + hashlib.sha256(canonical_request.encode("utf-8")).hexdigest()
+                self.algorithm
+                + "\n"
+                + self.xAmzDateTime
+                + "\n"
+                + self.credential_scope
+                + "\n"
+                + hashlib.sha256(canonical_request.encode("utf-8")).hexdigest()
         )
         return string_to_sign
 

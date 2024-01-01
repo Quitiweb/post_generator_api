@@ -28,11 +28,11 @@ import re  # noqa: F401
 
 import six
 
-from paapi5_python_sdk.models.duration_price import DurationPrice  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_availability import OfferAvailability  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_condition import OfferCondition  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_delivery_info import OfferDeliveryInfo  # noqa: F401,E501
-from paapi5_python_sdk.models.offer_merchant_info import OfferMerchantInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.duration_price import DurationPrice  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_availability import OfferAvailability  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_condition import OfferCondition  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_delivery_info import OfferDeliveryInfo  # noqa: F401,E501
+from aws.paapi5_python_sdk.models.offer_merchant_info import OfferMerchantInfo  # noqa: F401,E501
 
 
 class RentalOfferListing(object):

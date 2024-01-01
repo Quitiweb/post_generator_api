@@ -27,4 +27,4 @@ from __future__ import absolute_import
 
 
 # import apis into api package
-from paapi5_python_sdk.api.default_api import DefaultApi
+from aws.paapi5_python_sdk.api.default_api import DefaultApi
