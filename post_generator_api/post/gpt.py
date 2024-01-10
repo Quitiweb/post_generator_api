@@ -6,7 +6,7 @@ from decouple import config
 from dotenv import load_dotenv
 from openai._exceptions import RateLimitError
 
-from aws.utils import get_product_description
+from aws.utils import get_product_title_and_description
 from .models import Post, Title
 from .tools.prompts import gpt_image_v2, gpt_multiple_titles, gpt_titles_non_related
 from .tools.utils import remove_html_tags
@@ -67,13 +67,14 @@ def generate_titles_gpt(category, ntitles=30, tokens=0):
 
 
 def generate_post_gpt(title, tokens=0, asin=None, domain=None):
-    gpt_prompt = title.get_gpt_prompt()
-    description = f"Título: {title.name}. " + gpt_prompt.prompt
-
     if asin:
         # Call PAAPI and get amazon product description
-        title.description = get_product_description(asin)
+        title.name, title.description = get_product_title_and_description(asin)
+        gpt_prompt = title.get_gpt_prompt("analisis_producto")
+    else:
+        gpt_prompt = title.get_gpt_prompt()
 
+    description = f"Título: {title.name}. " + gpt_prompt.prompt
     if title.description:
         description += ". Básate en esta información: " + title.description
 

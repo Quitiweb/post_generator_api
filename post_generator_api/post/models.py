@@ -29,7 +29,7 @@ class Title(models.Model):
         null=True, blank=True
     )
 
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=500, default="")
     description = models.TextField(null=True, blank=True)
     used = models.BooleanField(default=False)
 
@@ -40,9 +40,15 @@ class Title(models.Model):
     def get_random_title_from_cat(category):
         return Title.objects.filter(used=False, category__name__contains=category).first()
 
-    def get_gpt_prompt(self):
+    def get_gpt_prompt(self, prompt=""):
         if self.gpt_prompt:
             return self.gpt_prompt
+        if prompt:
+            try:
+                return GptPrompt.objects.get(name=prompt)
+            except GptPrompt.DoesNotExist:
+                print("Error de garrafa")
+
         return GptPrompt.objects.all().first()
 
 
