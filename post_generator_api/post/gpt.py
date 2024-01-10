@@ -6,16 +6,17 @@ from decouple import config
 from dotenv import load_dotenv
 from openai._exceptions import RateLimitError
 
+from aws.utils import get_product_description
 from .models import Post, Title
-from .tools.prompts import (
-    gpt_image_v2, gpt_multiple_titles, gpt_titles_non_related, gpt_post, )
+from .tools.prompts import gpt_image_v2, gpt_multiple_titles, gpt_titles_non_related
+from .tools.utils import remove_html_tags
 
 load_dotenv()
 openai.api_key = config("OPENAI_API_KEY")
 # GPT_MODEL = "gpt-3.5-turbo"
-# GPT_MODEL = "gpt-4"
+GPT_MODEL = "gpt-4"
 # GPT_MODEL = "gpt-4-32k"
-GPT_MODEL = "gpt-4-1106-preview"
+# GPT_MODEL = "gpt-4-1106-preview"
 
 client = openai.OpenAI()
 
@@ -65,9 +66,13 @@ def generate_titles_gpt(category, ntitles=30, tokens=0):
     return cleaned_string, tokens
 
 
-def generate_post_gpt(title, tokens, domain):
-    description = f"Título: {title.name}. "
-    description += title.gpt_prompt.prompt if title.gpt_prompt else gpt_post
+def generate_post_gpt(title, tokens=0, asin=None, domain=None):
+    gpt_prompt = title.get_gpt_prompt()
+    description = f"Título: {title.name}. " + gpt_prompt.prompt
+
+    if asin:
+        # Call PAAPI and get amazon product description
+        title.description = get_product_description(asin)
 
     if title.description:
         description += ". Básate en esta información: " + title.description
@@ -98,7 +103,7 @@ def generate_post_gpt(title, tokens, domain):
     return post.description, tokens
 
 
-def call_gpt(description, tokens, model=GPT_MODEL):
+def call_gpt(description, tokens=0, model=GPT_MODEL):
     result = ""
     retries = 5
     ntries = 0
@@ -129,4 +134,4 @@ def call_gpt(description, tokens, model=GPT_MODEL):
 
         tokens = response.usage.total_tokens
 
-    return result, tokens
+    return remove_html_tags(result), tokens

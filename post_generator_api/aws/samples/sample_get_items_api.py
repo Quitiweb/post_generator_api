@@ -84,7 +84,6 @@ def get_items(item_ids):
     ]
 
     """ Forming request """
-
     try:
         get_items_request = GetItemsRequest(
             partner_tag=partner_tag,
@@ -103,7 +102,7 @@ def get_items(item_ids):
         response = default_api.get_items(get_items_request)
 
         print("API called Successfully")
-        print("Complete Response:", response)
+        # print("Complete Response:", response)
 
         """ Parse response """
         # TODO: Esta parte la comento porque en ppio imprime ya todo arriba
@@ -144,6 +143,8 @@ def get_items(item_ids):
             print("\nPrinting Errors:\nPrinting First Error Object from list of Errors")
             print("Error code", response.errors[0].code)
             print("Error message", response.errors[0].message)
+
+        return parse_response(response.items_result.items)
 
     except ApiException as exception:
         print("Error calling PA-API 5.0!")

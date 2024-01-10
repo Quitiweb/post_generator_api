@@ -40,6 +40,12 @@ class Title(models.Model):
     def get_random_title_from_cat(category):
         return Title.objects.filter(used=False, category__name__contains=category).first()
 
+    def get_gpt_prompt(self):
+        if self.gpt_prompt:
+            return self.gpt_prompt
+        return GptPrompt.objects.all().first()
+
+
     class Meta:
         verbose_name = "Title"
         verbose_name_plural = "Titles"

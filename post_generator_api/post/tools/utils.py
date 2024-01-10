@@ -11,6 +11,12 @@ from django.core.files.temp import NamedTemporaryFile
 from .prompts import url_block
 
 
+def remove_html_tags(text):
+    # Remove the specific text ```html``` and ``` from the string
+    cleaned_text = text.replace("```html", "").replace("```", "")
+    return cleaned_text.strip()
+
+
 def save_images_from_url(post_model, urls):
     select_img = 0
     for url in urls:

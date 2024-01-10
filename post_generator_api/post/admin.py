@@ -37,7 +37,7 @@ class PostAdmin(admin.ModelAdmin):
 class TitleAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "category", "used",)
     search_fields = ("name",)
-    list_filter = ("used", "category",)
+    list_filter = ("category__section", "used", "category",)
     change_list_template = "title_admin.html"
 
     def get_urls(self):
