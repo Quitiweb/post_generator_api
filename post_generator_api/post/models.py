@@ -51,7 +51,6 @@ class Title(models.Model):
 
         return GptPrompt.objects.all().first()
 
-
     class Meta:
         verbose_name = "Title"
         verbose_name_plural = "Titles"
