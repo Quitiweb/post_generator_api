@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "post.quitiweb.com",
     "127.0.0.1",
+    "post-generator-api-v1.ew.r.appspot.com",
 ]
 
 # Application definition
@@ -112,8 +113,10 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
+STATIC_ROOT = "static"
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
+STATICFILES_DIRS = []
+# STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
 
 # Media Files
 MEDIA_URL = "/media/"
