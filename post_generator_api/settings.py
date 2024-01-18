@@ -22,7 +22,7 @@ PUBLIC_ROOT = os.path.abspath(os.path.join(HOST_ROOT, "public"))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rj10pz#$#scd=ykv&-dni@2q353xnu%ynmj=9zxscj5q9mr25u'
+SECRET_KEY = config("SECRET_KEY", default="django_secrets")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -30,7 +30,6 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "post.quitiweb.com",
     "127.0.0.1",
-    "post-generator-api-v1.ew.r.appspot.com",
 ]
 
 # Application definition
@@ -108,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Madrid'
 USE_I18N = True
 USE_TZ = True
 

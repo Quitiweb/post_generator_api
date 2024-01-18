@@ -164,3 +164,10 @@ cython_debug/
 post_generator_api/media/
 media/
 .DS_Store
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+.ebextensions/
+.ebextensions/django.config
