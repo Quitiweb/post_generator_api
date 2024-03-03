@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
         parser.add_argument(
             "--aws_id", type=str, nargs="?", default=[],
-            help="A list with AWS products IDs",
+            help="Args: A list with AWS products IDs",
             action="append",
         )
 

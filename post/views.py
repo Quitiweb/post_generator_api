@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .gpt import generate_post_gpt
 from .models import Category, Post, Title
-from .serializers import PostGeneratorSerializer
+from .serializers import CategorySerializer, PostGeneratorSerializer, TitleSerializer
 
 
 class PostGeneratorView(ModelViewSet):
@@ -67,3 +67,15 @@ class PostGeneratorView(ModelViewSet):
             return Response({"title": title.name, "description": result}, status=status.HTTP_200_OK)
 
         return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CategoryView(ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class TitleView(ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Title.objects.all()
+    serializer_class = TitleSerializer
