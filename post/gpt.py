@@ -13,8 +13,8 @@ from .tools.utils import remove_html_tags
 
 load_dotenv()
 openai.api_key = config("OPENAI_API_KEY")
-# GPT_MODEL = "gpt-3.5-turbo"
-GPT_MODEL = "gpt-4"
+GPT_MODEL = "gpt-3.5-turbo"
+# GPT_MODEL = "gpt-4"
 # GPT_MODEL = "gpt-4-32k"
 # GPT_MODEL = "gpt-4-1106-preview"
 

@@ -8,6 +8,8 @@ from .gpt import generate_post_gpt
 from .models import Category, Post, Title
 from .serializers import CategorySerializer, PostGeneratorSerializer, TitleSerializer
 
+TEST = False
+
 
 class PostGeneratorView(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
@@ -16,6 +18,10 @@ class PostGeneratorView(ModelViewSet):
 
     @action(methods=["get"], detail=False, url_path="generate", serializer_class=PostGeneratorSerializer)
     def generate(self, request, *args, **kwargs):
+        if TEST:
+            data_test = {"title": "Test Generate Title", "description": "Test Generate Description"}
+            return Response(data_test, status=status.HTTP_200_OK)
+
         category = request.query_params.get("category")
         if category:
             tokens = 0
@@ -49,6 +55,10 @@ class PostGeneratorView(ModelViewSet):
         :param kwargs: None
         :return: HttpResponse
         """
+        if TEST:
+            data_test = {"title": "Test AWS Title", "description": "Test AWS Description"}
+            return Response(data_test, status=status.HTTP_200_OK)
+
         category_name = request.query_params.get("category")
         amazon_id = request.query_params.get("asin")
 
