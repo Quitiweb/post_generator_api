@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .gpt import generate_post_gpt
+from .gpt import generate_post_gpt, generate_aws_post_gpt
 from .models import Category, Post, Title
 from .serializers import CategorySerializer, PostGeneratorSerializer, TitleSerializer
 
@@ -59,22 +59,11 @@ class PostGeneratorView(ModelViewSet):
             data_test = {"title": "Test AWS Title", "description": "Test AWS Description"}
             return Response(data_test, status=status.HTTP_200_OK)
 
-        category_name = request.query_params.get("category")
         amazon_id = request.query_params.get("asin")
 
-        if category_name and amazon_id:
-            try:
-                category = Category.objects.get(name=category_name)
-            except Category.DoesNotExist:
-                return Response(
-                    {"error": "there is not category with that name."}, status=status.HTTP_303_SEE_OTHER)
-
-            title = Title(category=category)
-            result, tokens = generate_post_gpt(
-                title=title,
-                asin=amazon_id,
-            )
-            return Response({"title": title.name, "description": result}, status=status.HTTP_200_OK)
+        if amazon_id:
+            result, tokens, title_name = generate_aws_post_gpt(asin=amazon_id)
+            return Response({"title": title_name, "description": result}, status=status.HTTP_200_OK)
 
         return Response({}, status=status.HTTP_400_BAD_REQUEST)
 

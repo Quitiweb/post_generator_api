@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from openai._exceptions import RateLimitError
 
 from aws.utils import get_product_title_and_description
-from .models import Post, Title
+from .models import Post, Title, GptPrompt
 from .tools.prompts import gpt_image_v2, gpt_multiple_titles, gpt_titles_non_related
 from .tools.utils import remove_html_tags
 
@@ -66,14 +66,8 @@ def generate_titles_gpt(category, ntitles=30, tokens=0):
     return cleaned_string, tokens
 
 
-def generate_post_gpt(title, tokens=0, asin=None, domain=None):
-    if asin:
-        # Call PAAPI and get amazon product description
-        title.name, title.description = get_product_title_and_description(asin)
-        gpt_prompt = title.get_gpt_prompt("analisis_producto")
-    else:
-        gpt_prompt = title.get_gpt_prompt()
-
+def generate_post_gpt(title, tokens=0, domain=None):
+    gpt_prompt = title.get_gpt_prompt()
     description = f"Título: {title.name}. " + gpt_prompt.prompt
     if title.description:
         description += ". Básate en esta información: " + title.description
@@ -104,7 +98,30 @@ def generate_post_gpt(title, tokens=0, asin=None, domain=None):
     return post.description, tokens
 
 
+def generate_aws_post_gpt(asin, tokens=0):
+    # Call PAAPI and get amazon product description
+    title_name, title_description = get_product_title_and_description(asin)
+    gpt_prompt = GptPrompt.objects.get(name="analisis_producto")
+
+    description = f"Título: {title_name}. " + gpt_prompt.prompt
+    description += ". Básate en esta información: " + title_description
+
+    result, tokens = call_gpt(description, tokens)
+
+    return result, tokens, title_name
+
+
 def call_gpt(description, tokens=0, model=GPT_MODEL):
+    """
+    Llama a la API de Open AI y ChatGPT.
+    Recibimos una descripción que le enviamos a ChatGPT y nos devuelve
+    la respuesta de ChatGPT y los tokens que llevamos utilizados
+
+    :param description: Texto para enviar a ChatGPT
+    :param tokens: Los tokens consumidos hasta el momento
+    :param model: El modelo de ChatGPT de turno: gtp-4, gpt-4o, gpt-3.5-turbo
+    :return: Una tupla con la respuesta de ChatGPT y los tokens que lleva consumidos
+    """
     result = ""
     retries = 5
     ntries = 0
