@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "post.quitiweb.com",
     "127.0.0.1",
+    "localhost",
     "ec2-15-188-189-171.eu-west-3.compute.amazonaws.com",
 ]
 
