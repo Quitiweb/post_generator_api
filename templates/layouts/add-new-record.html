@@ -1,0 +1,59 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} {{ table_title }} {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">{{ segment }}</h4>
+          </div>
+
+          <form enctype="multipart/form-data" action="/add/{{ segment }}/new_record" method="post">
+
+            {% csrf_token %}
+
+            <div class="card-body">
+
+              {% if form.errors %}
+                <div class="alert alert-danger">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="material-icons">close</i>
+                  </button>
+                  <span>
+                    <b> Warning - </b> {{ form.errors }}
+                  </span>
+                </div>
+              {% endif %}
+
+              <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      {{ form.as_table }}
+                    </tbody>
+                  </table>
+              </div>
+
+            </div>
+
+            <button class="btn btn-primary btn-block" type="submit">Save</button>
+
+          </form>
+        </div>
+      </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+  $('#id_venues').on('change', function(){
+    LoadWashrooms();
+  });
+{% endblock javascripts %}

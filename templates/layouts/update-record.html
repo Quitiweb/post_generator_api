@@ -1,0 +1,69 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} {{ table_title }} {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">{{ segment }}</h4>
+          </div>
+
+          <form action="" method="post">
+            {% csrf_token %}
+
+            <div class="card-body">
+              <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      {{ form.as_table }}
+                    </tbody>
+                  </table>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" type="submit">Update</button>
+
+          </form>
+
+          {% if segment in 'campaigns' and media|length > 0 %}
+            <div class="card-body">
+              <div class="table-responsive">
+
+                <h4>Media files for this campaign</h4>
+                <ul style="padding-left: 10px;">
+                  {% for m in media %}
+                    <li style="list-style-type: none;">
+                      <a href="/update/media/{{ m.id }}">{{ m.name }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+
+              </div>
+            </div>
+          {% endif %}
+
+        </div>
+      </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+  {% if segment in 'campaigns' %}
+    $(document).ready(function() {
+      LoadWashrooms();
+    });
+
+    $('#id_venues').on('change', function(){
+      LoadWashrooms();
+    });
+  {% endif %}
+{% endblock javascripts %}

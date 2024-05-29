@@ -1,0 +1,90 @@
+<div class="sidebar" data-color="blue" data-background-color="white" data-image="/static/assets/img/sidebar-1.jpg">
+  <!--
+    Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+    Tip 2: you can also add an image using data-image tag
+
+    ICONS FROM: https://mui.com/material-ui/material-icons/
+  -->
+  <div class="logo">
+    <a rel="noopener noreferrer" href="/" class="simple-text logo-normal">
+      Venue CMS
+    </a>
+  </div>
+  <div class="sidebar-wrapper">
+    <ul class="nav">
+    {% if request.user.is_authenticated %}
+
+      <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+        <a class="nav-link" href="/">
+          <i class="material-icons">dashboard</i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'campaigns' in segment %} active {% endif %}">
+        <a class="nav-link" href="/show/campaigns">
+          <i class="material-icons">campaign</i>
+          <p>Campaigns</p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'venues' in segment %} active {% endif %}">
+        <a class="nav-link" href="/show/venues">
+          <i class="material-icons">location_city</i>
+          <p>Venues</p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'washroom-groups' in segment %} active {% endif %}">
+        <a class="nav-link" href="/show/washroom-groups">
+          <i class="material-icons">groups</i>
+          <p>Washroom Groups</p>
+        </a>
+        <ul>
+          <li class="nav-item {% if 'washrooms' in segment %} active {% endif %}">
+            <a class="nav-link" href="/show/washrooms">
+              <i class="material-icons">wc</i>
+              <p>Washrooms</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item {% if 'faucets' in segment %} active {% endif %}">
+        <a class="nav-link" href="/show/faucets">
+          <i class="material-icons">countertops</i>
+          <p>Faucets</p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'media' in segment %} active {% endif %}">
+        <a class="nav-link" href="/show/media">
+          <i class="material-icons">bubble_chart</i>
+          <p>Media</p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'reporting' in segment %} active {% endif %}">
+        <a class="nav-link" href="/reporting">
+          <i class="material-icons">notifications</i>
+          <p>Reporting</p>
+        </a>
+      </li>
+
+      {% if request.user.is_superuser %}
+        <div class="logo"></div>
+
+        <li class="nav-item {% if 'user_admin' in segment %} active {% endif %}">
+          <a class="nav-link" href="/show/user-admin">
+            <i class="material-icons">supervisor_account_icon</i>
+            <p>User Admin</p>
+          </a>
+        </li>
+        <li class="nav-item {% if 'avno_admin' in segment %} active {% endif %}">
+          <a class="nav-link" href="/show/avno-admin">
+            <i class="material-icons">person</i>
+            <p>AVNO Admin</p>
+          </a>
+        </li>
+
+      {% endif %}
+
+    {% endif %}
+    </ul>
+  </div>
+
+</div>

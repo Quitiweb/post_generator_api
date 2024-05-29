@@ -1,0 +1,63 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} {{ table_title }} {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">{{ segment }}</h4>
+            <p class="card-category">{{ table_subtitle }}</p>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+
+                <thead class=" text-primary">
+                  {% for head in table_header %}
+                    <th>{{ head }}</th>
+                  {% endfor %}
+                </thead>
+
+                <tbody>
+                  {% for body in table_body %}
+                    <tr>
+                      {% for key, value in body.items %}
+                        <td>
+                          {% if key == 'Action' %}
+                            <a href="/update/{{ segment }}/{{ value }}">Edit</a> | <a href="/delete/{{ segment }}/{{ value }}">Delete</a>
+                          {% else %}
+                            {{ value }}
+                          {% endif %}
+                        </td>
+                      {% endfor %}
+                    </tr>
+                  {% endfor %}
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+        {% if segment in 'washrooms' %}
+          <a href="{% url 'add_new_record' model='washroom-groups' %}">
+            <button class="btn btn-primary btn-block">New Washroom Group</button>
+          </a>
+        {% endif %}
+
+      </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
