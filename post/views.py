@@ -3,12 +3,19 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-
+from rest_framework.decorators import api_view
 from .gpt import generate_post_gpt
 from .models import Category, Post, Title
 from .serializers import CategorySerializer, PostGeneratorSerializer, TitleSerializer
-
+from rest_framework.reverse import reverse
 TEST = False
+
+
+@api_view(['GET'])
+def api_root(request):
+    return Response({
+        'post': reverse('post_generator', request=request),
+    })
 
 
 class PostGeneratorView(ModelViewSet):
