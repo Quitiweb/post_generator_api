@@ -55,11 +55,11 @@ class PostGeneratorView(ModelViewSet):
         :param kwargs: None
         :return: HttpResponse
         """
-        if TEST:
-            data_test = {"title": "Test AWS Title", "description": "Test AWS Description"}
-            return Response(data_test, status=status.HTTP_200_OK)
-
         amazon_id = request.query_params.get("asin")
+
+        if TEST:
+            data_test = {"title": f"Test AWS Title for {amazon_id}", "description": f"Test AWS Description for {amazon_id}"}
+            return Response(data_test, status=status.HTTP_200_OK)
 
         if amazon_id:
             result, tokens, title_name = generate_aws_post_gpt(asin=amazon_id)
