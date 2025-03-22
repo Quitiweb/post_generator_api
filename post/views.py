@@ -1,14 +1,15 @@
-from rest_framework import permissions
-from rest_framework import status
+from decouple import config
+from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .gpt import generate_post_gpt, generate_aws_post_gpt
+from .gpt import generate_aws_post_gpt, generate_post_gpt
 from .models import Category, Post, Title
-from .serializers import CategorySerializer, PostGeneratorSerializer, TitleSerializer
+from .serializers import (CategorySerializer, PostGeneratorSerializer,
+                          TitleSerializer)
 
-TEST = False
+TEST = config("TEST", default=False, cast=bool)
 
 
 class PostGeneratorView(ModelViewSet):
