@@ -2,6 +2,13 @@ from .samples.sample_get_items_api import get_items
 
 
 def get_product_title_and_description(asin):
+    """
+    Dado un código ASIN de Amazon, llama a la PAAPI
+    y te devuelve el título y la descripción del producto
+
+    :param asin: código ASIN del producto (p.e: B091D2CKC7)
+    :return: tupla con (título, descripción)
+    """
     product_title = ""
     product_description = ""
     amazon_product = get_items([asin])
