@@ -6,18 +6,15 @@ from decouple import config
 from dotenv import load_dotenv
 from openai._exceptions import RateLimitError
 
-from aws.utils import get_product_title_and_description
+from aws.utils import get_product_images, get_product_title_and_description
 from .models import Post, Title, GptPrompt
 from .tools.prompts import gpt_image_v2, gpt_multiple_titles, gpt_titles_non_related
 from .tools.utils import remove_html_tags
 
 load_dotenv()
 openai.api_key = config("OPENAI_API_KEY")
-# GPT_MODEL = "gpt-3.5-turbo"
 GPT_MODEL = "gpt-4o"
-# GPT_MODEL = "gpt-4-32k"
-# GPT_MODEL = "gpt-4-1106-preview"
-
+TEST_GPT = config("TEST_GPT", default=False, cast=bool)
 client = openai.OpenAI()
 
 
@@ -101,14 +98,22 @@ def generate_post_gpt(title, tokens=0, domain=None):
 def generate_aws_post_gpt(asin, tokens=0):
     # Call PAAPI and get amazon product description
     title_name, title_description = get_product_title_and_description(asin)
+    product_images = get_product_images(asin)
+
+    amazon_shortcode = f'[amazon box="{asin}"]'
     gpt_prompt = GptPrompt.objects.get(name="analisis_producto")
 
     description = f"Título: {title_name}. " + gpt_prompt.prompt
+    description += f""". incluye este shortcode en una línea aparte 
+                    justo antes de la conclusión: {amazon_shortcode}"""
     description += ". Básate en esta información: " + title_description
 
-    result, tokens = call_gpt(description, tokens)
+    if TEST_GPT:
+        result = "Test AWS Description"
+    else:
+        result, tokens = call_gpt(description, tokens)
 
-    return result, tokens, title_name
+    return result, tokens, title_name, product_images
 
 
 def call_gpt(description, tokens=0, model=GPT_MODEL):
