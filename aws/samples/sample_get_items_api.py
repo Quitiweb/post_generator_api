@@ -151,6 +151,7 @@ def get_items(item_ids):
         print("Status code:", exception.status)
         print("Errors :", exception.body)
         print("Request ID:", exception.headers["x-amzn-RequestId"])
+        return None, exception
 
     except TypeError as exception:
         print("TypeError :", exception)
@@ -360,8 +361,3 @@ def get_items_async():
 
     except Exception as exception:
         print("Exception :", exception)
-
-
-# get_items()
-# get_items_with_http_info()
-# get_items_async()

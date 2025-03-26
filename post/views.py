@@ -6,8 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .gpt import generate_aws_post_gpt, generate_post_gpt
 from .models import Category, Post, Title
-from .serializers import (CategorySerializer, PostGeneratorSerializer,
-                          TitleSerializer)
+from .serializers import CategorySerializer, PostGeneratorSerializer, TitleSerializer
 
 TEST = config("TEST", default=False, cast=bool)
 
