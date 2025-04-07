@@ -98,7 +98,9 @@ def generate_post_gpt(title, tokens=0, domain=None):
 def generate_aws_post_gpt(asin, tokens=0):
     # Call PAAPI and get amazon product description
     title_name, title_description = get_product_title_and_description(asin)
-    product_images = get_product_images(asin)
+
+    # TODO: Product images does not work yet
+    # product_images = get_product_images(asin)
 
     amazon_shortcode = f'[amazon box="{asin}"]'
     gpt_prompt = GptPrompt.objects.get(name="analisis_producto")
@@ -113,7 +115,8 @@ def generate_aws_post_gpt(asin, tokens=0):
     else:
         result, tokens = call_gpt(description, tokens)
 
-    return result, tokens, title_name, product_images
+    # return result, tokens, title_name, product_images
+    return result, tokens, title_name
 
 
 def call_gpt(description, tokens=0, model=GPT_MODEL):

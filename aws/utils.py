@@ -36,6 +36,7 @@ def get_product_images(asin):
             "IMAGES. Amazon PAAPI is not working. Please, check it from affiliates website.")
 
     item_info = amazon_product[asin].item_info
+    # TODO: ItemInfo object has no attribute 'images'
     if item_info.images is not None:
         for image in item_info.images.primary.display_values:
             product_images.append(image)
