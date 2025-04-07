@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from aws.samples.sample_get_items_api import get_items
+from aws.utils import get_product_title_and_description
 from .serializers import TestAWSPaapiSerializer
 import json
 
@@ -15,6 +16,18 @@ class TestAWSPaapiView(ModelViewSet):
     def test_paapi(self, request):
         asin = request.query_params.get("asin", "B094D3JGLT")  # Default ASIN if not provided
         paapi_res = get_items([asin])
+
+        if paapi_res is None:
+            return Response(
+                {
+                    "ASIN": asin,
+                    "Message": "The PAAPI returned None.",
+                    "Status": "N/A",
+                    "Errors": {"Message": "The PAAPI returned None."},
+                    "RequestID": "N/A"
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
         if len(paapi_res) > 1:
             exception = paapi_res[1]
@@ -35,5 +48,6 @@ class TestAWSPaapiView(ModelViewSet):
                 },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-
-        return Response(paapi_res, status=status.HTTP_200_OK)
+        else:
+            title, description = get_product_title_and_description(asin)
+            return Response({"title": title, "description": description}, status=status.HTTP_200_OK)
